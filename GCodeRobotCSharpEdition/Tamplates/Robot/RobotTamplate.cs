@@ -68,7 +68,7 @@ namespace GCodeRobotCSharpEdition.Robot
             if (PrParam.count == 0)
             {
                 stateTempl.CurrentState = "Print Errore empty patch";
-                form.ll.Add(3, "Print Errore empty patch");
+                LogList.Add(3, "Print Errore empty patch");
                 stateTempl.color = Color.Orange;
                 form.CurState = stateTempl;
                 return;
@@ -91,6 +91,7 @@ namespace GCodeRobotCSharpEdition.Robot
             printing = true;
             PrParam.curnumb = fid;
             stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
+            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
             stateTempl.color = Color.Green;
 
             form.CurState = stateTempl;
@@ -129,6 +130,7 @@ namespace GCodeRobotCSharpEdition.Robot
                                 sTmpl.is_last_file = true.ToString();
                                 PrParam.curnumb++;
                                 sTmpl.current_file_path =PrParam.filename + $"_{ PrParam.curnumb }" + extension;
+                                LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
                                 FTPLoad(PrParam.filename + $"_{ PrParam.curnumb }" + extension, PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb }" + extension);
                                 sendtoServ(sTmpl);
                                 printing = true;
@@ -146,6 +148,7 @@ namespace GCodeRobotCSharpEdition.Robot
                             }
                             PrParam.curnumb++;
                             Thread.Sleep(2000);
+                            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
                             stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
                             stateTempl.color = Color.Green;
 
@@ -177,6 +180,7 @@ namespace GCodeRobotCSharpEdition.Robot
                 sendtoServ(sTmpl);
                 printing = true;
                 lastFile = true;
+                LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
                 form.CurState = stateTempl;
             }
             else
@@ -187,6 +191,7 @@ namespace GCodeRobotCSharpEdition.Robot
                 FTPLoad(fname, PrParam.patch + "\\"+ fname);
                 sendtoServ(sTmpl);
                 printing = true;
+                LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
                 form.CurState = stateTempl;
             }
             PrParam.curnumb =fid+1;
@@ -255,7 +260,7 @@ namespace GCodeRobotCSharpEdition.Robot
                         stateTempl.color = Color.Green;
                         stateTempl.CurrentState = "Ready to print";
                         //lastState = state;
-                        form.ll.Add(1, "Ready to print");
+                        LogList.Add(1, "Ready to print");
                         form.CurState = stateTempl;
                         if (printing)
                         {   
@@ -271,24 +276,37 @@ namespace GCodeRobotCSharpEdition.Robot
                         lastState = state;
                         if (z == "0")
                         {
-                            form.ll.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
+                            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
                             stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
                         }
                         else
                         {
-                            form.ll.Add(2, "");
-                            form.ll.AddZ(float.Parse(z));
+                            LogList.Add(2, "");
+                            LogList.AddZ(float.Parse(z));
                             stateTempl.CurrentState = $"current hieght z={z}";
                         }
                         //stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}, current z={z}";
                         form.CurState = stateTempl;
                         SendNextFile = false;
                         break;
-                    //case "2":
-                    //    stateTempl.color = Color.Orange;
-                    //    stateTempl.CurrentState = $"Need next file confirm contious of printing, current z={z}";
-                    //    SendNextFile = true;
-                    //    break;
+                    case "2":
+                        stateTempl.color = Color.Green;
+                        lastState = state;
+                        if (z == "0")
+                        {
+                            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
+                            stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
+                        }
+                        else
+                        {
+                            LogList.Add(2, "");
+                            LogList.AddZ(float.Parse(z));
+                            stateTempl.CurrentState = $"current hieght z={z}";
+                        }
+                        //stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}, current z={z}";
+                        form.CurState = stateTempl;
+                        SendNextFile = false;
+                        break;
                     default:
                         stateTempl.color = Color.Red;
                         stateTempl.CurrentState = "Connection errore";
@@ -349,7 +367,7 @@ namespace GCodeRobotCSharpEdition.Robot
                         default:
                             stateTempl.color = Color.Red;
                             stateTempl.CurrentState = "Connection error";
-                            form.ll.Add(3, "Connection error");
+                            LogList.Add(3, "Connection error");
                             form.CurState = stateTempl;
                             break;
                     }
@@ -408,10 +426,10 @@ namespace GCodeRobotCSharpEdition.Robot
             }
         private void FTPLoad(string fileName,string pathWay)
         {
-            WebClient client = new WebClient();
-            client.Credentials = new NetworkCredential("pi", "8");
-            client.UploadFile(
-                $"ftp://{Addres}/files/{fileName}", $"{pathWay}");
+            //WebClient client = new WebClient();
+            //client.Credentials = new NetworkCredential("pi", "8");
+            //client.UploadFile(
+            //    $"ftp://{Addres}/files/{fileName}", $"{pathWay}");
 
         }
 

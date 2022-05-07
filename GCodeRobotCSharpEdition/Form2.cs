@@ -18,7 +18,7 @@ namespace GCodeRobotCSharpEdition
         public static CancellationTokenSource cts = new CancellationTokenSource(); 
         public CancellationToken ct= cts.Token;
         private StateTempl _curState= new StateTempl("Ready to print",Color.Green);
-        public LogList ll = new LogList(); 
+        
         public StateTempl CurState
         {
             get
@@ -28,9 +28,10 @@ namespace GCodeRobotCSharpEdition
             set
             {
                 _curState = value;
-                //textBox2.Text = ll.Print();
-               //RobotState.Text = _curState.CurrentState.ToString();
-               // RobotState.ForeColor = _curState.
+                
+               
+               RobotState.Text = _curState.CurrentState.ToString();
+                RobotState.ForeColor = _curState.color;
 
             }
         }
@@ -41,7 +42,7 @@ namespace GCodeRobotCSharpEdition
             InitializeComponent();
             CurState= new StateTempl("Ready to print", Color.Green); 
             robot = rtmpl;
-            
+            textBox2.Text = "aaa";   
             this.Text = ip;
             myTimer = new System.Windows.Forms.Timer();
             myTimer.Tick += new EventHandler(TimerEventProcessor);
@@ -55,13 +56,7 @@ namespace GCodeRobotCSharpEdition
 
 
         System.Windows.Forms.Timer PrintTimer = new System.Windows.Forms.Timer();
-        private void PrintNext_Click(object sender, EventArgs e)
-        {
-            
-            
-            
-        }
-
+       
         
         
         private void Print_Click(object sender, EventArgs e)
@@ -139,8 +134,10 @@ namespace GCodeRobotCSharpEdition
         {
             RobotState.Text = CurState.CurrentState;
             RobotState.ForeColor = CurState.color;
-            robot.ChechConnection();
-            //textBox2.Text = ll.Print();
+            //robot.ChechConnection();
+            var a = LogList.Print();
+            textBox2.Text = "";
+            textBox2.AppendText(a);
             if (robot.isPrinting)
             {   
                 Print.Enabled = false;
@@ -157,7 +154,7 @@ namespace GCodeRobotCSharpEdition
                     else
                     {
 
-                        //StartPrint.Enabled = true;
+                        StartPrint.Enabled = false;
                         Collection.Enabled = false;
                         //PrintNext.Text = "Print next";
                         //Repeat.Enabled = false;

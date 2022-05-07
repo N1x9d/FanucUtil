@@ -11,12 +11,13 @@ namespace GCodeRobotCSharpEdition.Tamplates
         public logHistTamplate(int type, string value)
         {
             Type = type;
-            Value = value;
+            val = value;
         }
 
         public int Type { get; set; } //1 print status, 2 hieght, 3 other
-        private string val;
-        public String Value { get
+        private string val ="";
+        public string Value { 
+            get
             {
                 val = GetString();
                 return val;
@@ -54,7 +55,7 @@ namespace GCodeRobotCSharpEdition.Tamplates
         private string GetString()
         {
             if (Type == 1 || Type == 3)
-                return Value;
+                return val;
             else
             {
                 string outVal = $"cur z={Z} min z = {MinZ} max z = {MaxZ} avgZ = {AvgZ}";
