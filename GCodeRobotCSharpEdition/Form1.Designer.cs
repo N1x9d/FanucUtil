@@ -30,27 +30,28 @@ namespace GCodeRobotCSharpEdition
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.Second_pass = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.Laser_pass = new System.Windows.Forms.CheckBox();
+            this.edit_Split = new System.Windows.Forms.TextBox();
+            this.check_Layers = new System.Windows.Forms.CheckBox();
             this.WaweInd = new System.Windows.Forms.TextBox();
             this.Degree_def = new System.Windows.Forms.TextBox();
             this.WeldSheild = new System.Windows.Forms.CheckBox();
             this.Wave = new System.Windows.Forms.CheckBox();
             this.RO = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.CheckDistance = new System.Windows.Forms.TextBox();
             this.check_startStop_Distance = new System.Windows.Forms.CheckBox();
-            this.edit_Split = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.check_Autoarc = new System.Windows.Forms.CheckBox();
             this.check_Weldspeed = new System.Windows.Forms.CheckBox();
-            this.check_Layers = new System.Windows.Forms.CheckBox();
             this.check_Noarc = new System.Windows.Forms.CheckBox();
             this.edit_Name = new System.Windows.Forms.TextBox();
             this.edit_TN = new System.Windows.Forms.TextBox();
@@ -155,6 +156,7 @@ namespace GCodeRobotCSharpEdition
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.Hammer = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.MakeTP = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -174,9 +176,9 @@ namespace GCodeRobotCSharpEdition
             this.обновленияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.проверитьОбновленияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -214,22 +216,19 @@ namespace GCodeRobotCSharpEdition
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.Second_pass);
+            this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.WaweInd);
             this.tabPage1.Controls.Add(this.Degree_def);
             this.tabPage1.Controls.Add(this.WeldSheild);
             this.tabPage1.Controls.Add(this.Wave);
             this.tabPage1.Controls.Add(this.RO);
             this.tabPage1.Controls.Add(this.checkBox2);
-            this.tabPage1.Controls.Add(this.label22);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.CheckDistance);
             this.tabPage1.Controls.Add(this.check_startStop_Distance);
-            this.tabPage1.Controls.Add(this.edit_Split);
             this.tabPage1.Controls.Add(this.label21);
             this.tabPage1.Controls.Add(this.check_Autoarc);
             this.tabPage1.Controls.Add(this.check_Weldspeed);
-            this.tabPage1.Controls.Add(this.check_Layers);
             this.tabPage1.Controls.Add(this.check_Noarc);
             this.tabPage1.Controls.Add(this.edit_Name);
             this.tabPage1.Controls.Add(this.edit_TN);
@@ -265,21 +264,62 @@ namespace GCodeRobotCSharpEdition
             this.tabPage1.Text = "Convert";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // Second_pass
+            // groupBox5
             // 
-            this.Second_pass.AutoSize = true;
-            this.Second_pass.Location = new System.Drawing.Point(746, 291);
-            this.Second_pass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Second_pass.Name = "Second_pass";
-            this.Second_pass.Size = new System.Drawing.Size(91, 19);
-            this.Second_pass.TabIndex = 101;
-            this.Second_pass.Text = "Second pass";
-            this.Second_pass.UseVisualStyleBackColor = true;
+            this.groupBox5.Controls.Add(this.label22);
+            this.groupBox5.Controls.Add(this.Laser_pass);
+            this.groupBox5.Controls.Add(this.edit_Split);
+            this.groupBox5.Controls.Add(this.check_Layers);
+            this.groupBox5.Location = new System.Drawing.Point(721, 289);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 107);
+            this.groupBox5.TabIndex = 103;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Layers split";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 25);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(66, 15);
+            this.label22.TabIndex = 93;
+            this.label22.Text = "Split layers:";
+            // 
+            // Laser_pass
+            // 
+            this.Laser_pass.AutoSize = true;
+            this.Laser_pass.Enabled = false;
+            this.Laser_pass.Location = new System.Drawing.Point(7, 76);
+            this.Laser_pass.Name = "Laser_pass";
+            this.Laser_pass.Size = new System.Drawing.Size(79, 19);
+            this.Laser_pass.TabIndex = 102;
+            this.Laser_pass.Text = "Laser pass";
+            this.Laser_pass.UseVisualStyleBackColor = true;
+            // 
+            // edit_Split
+            // 
+            this.edit_Split.Location = new System.Drawing.Point(89, 22);
+            this.edit_Split.Name = "edit_Split";
+            this.edit_Split.Size = new System.Drawing.Size(46, 23);
+            this.edit_Split.TabIndex = 90;
+            this.edit_Split.Text = "999";
+            // 
+            // check_Layers
+            // 
+            this.check_Layers.AutoSize = true;
+            this.check_Layers.Location = new System.Drawing.Point(7, 51);
+            this.check_Layers.Name = "check_Layers";
+            this.check_Layers.Size = new System.Drawing.Size(110, 19);
+            this.check_Layers.TabIndex = 86;
+            this.check_Layers.Text = "Autosplit layers ";
+            this.check_Layers.UseVisualStyleBackColor = true;
+            this.check_Layers.CheckedChanged += new System.EventHandler(this.check_Layers_CheckedChanged);
             // 
             // WaweInd
             // 
             this.WaweInd.Enabled = false;
-            this.WaweInd.Location = new System.Drawing.Point(662, 314);
+            this.WaweInd.Location = new System.Drawing.Point(606, 315);
             this.WaweInd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.WaweInd.Name = "WaweInd";
             this.WaweInd.Size = new System.Drawing.Size(35, 23);
@@ -289,7 +329,7 @@ namespace GCodeRobotCSharpEdition
             // Degree_def
             // 
             this.Degree_def.Enabled = false;
-            this.Degree_def.Location = new System.Drawing.Point(662, 289);
+            this.Degree_def.Location = new System.Drawing.Point(606, 290);
             this.Degree_def.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Degree_def.Name = "Degree_def";
             this.Degree_def.Size = new System.Drawing.Size(35, 23);
@@ -299,7 +339,7 @@ namespace GCodeRobotCSharpEdition
             // WeldSheild
             // 
             this.WeldSheild.AutoSize = true;
-            this.WeldSheild.Location = new System.Drawing.Point(557, 290);
+            this.WeldSheild.Location = new System.Drawing.Point(501, 291);
             this.WeldSheild.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.WeldSheild.Name = "WeldSheild";
             this.WeldSheild.Size = new System.Drawing.Size(88, 19);
@@ -311,7 +351,7 @@ namespace GCodeRobotCSharpEdition
             // Wave
             // 
             this.Wave.AutoSize = true;
-            this.Wave.Location = new System.Drawing.Point(557, 316);
+            this.Wave.Location = new System.Drawing.Point(501, 317);
             this.Wave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Wave.Name = "Wave";
             this.Wave.Size = new System.Drawing.Size(93, 19);
@@ -323,7 +363,7 @@ namespace GCodeRobotCSharpEdition
             // RO
             // 
             this.RO.AutoSize = true;
-            this.RO.Location = new System.Drawing.Point(557, 337);
+            this.RO.Location = new System.Drawing.Point(501, 338);
             this.RO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RO.Name = "RO";
             this.RO.Size = new System.Drawing.Size(80, 19);
@@ -345,19 +385,10 @@ namespace GCodeRobotCSharpEdition
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(291, 290);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(66, 15);
-            this.label22.TabIndex = 93;
-            this.label22.Text = "Split layers:";
-            // 
             // CheckDistance
             // 
             this.CheckDistance.Enabled = false;
-            this.CheckDistance.Location = new System.Drawing.Point(291, 337);
+            this.CheckDistance.Location = new System.Drawing.Point(309, 289);
             this.CheckDistance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CheckDistance.Name = "CheckDistance";
             this.CheckDistance.Size = new System.Drawing.Size(24, 23);
@@ -367,7 +398,7 @@ namespace GCodeRobotCSharpEdition
             // check_startStop_Distance
             // 
             this.check_startStop_Distance.AutoSize = true;
-            this.check_startStop_Distance.Location = new System.Drawing.Point(82, 339);
+            this.check_startStop_Distance.Location = new System.Drawing.Point(309, 316);
             this.check_startStop_Distance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.check_startStop_Distance.Name = "check_startStop_Distance";
             this.check_startStop_Distance.Size = new System.Drawing.Size(154, 19);
@@ -376,18 +407,10 @@ namespace GCodeRobotCSharpEdition
             this.check_startStop_Distance.UseVisualStyleBackColor = true;
             this.check_startStop_Distance.CheckedChanged += new System.EventHandler(this.check_startStop_Distance_CheckedChanged_1);
             // 
-            // edit_Split
-            // 
-            this.edit_Split.Location = new System.Drawing.Point(374, 287);
-            this.edit_Split.Name = "edit_Split";
-            this.edit_Split.Size = new System.Drawing.Size(46, 23);
-            this.edit_Split.TabIndex = 90;
-            this.edit_Split.Text = "999";
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(326, 340);
+            this.label21.Location = new System.Drawing.Point(344, 292);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(128, 15);
             this.label21.TabIndex = 89;
@@ -408,22 +431,12 @@ namespace GCodeRobotCSharpEdition
             // check_Weldspeed
             // 
             this.check_Weldspeed.AutoSize = true;
-            this.check_Weldspeed.Location = new System.Drawing.Point(291, 316);
+            this.check_Weldspeed.Location = new System.Drawing.Point(82, 341);
             this.check_Weldspeed.Name = "check_Weldspeed";
             this.check_Weldspeed.Size = new System.Drawing.Size(218, 19);
             this.check_Weldspeed.TabIndex = 87;
             this.check_Weldspeed.Text = "Use WELD_SPEED instead of feedrate";
             this.check_Weldspeed.UseVisualStyleBackColor = true;
-            // 
-            // check_Layers
-            // 
-            this.check_Layers.AutoSize = true;
-            this.check_Layers.Location = new System.Drawing.Point(82, 357);
-            this.check_Layers.Name = "check_Layers";
-            this.check_Layers.Size = new System.Drawing.Size(203, 19);
-            this.check_Layers.TabIndex = 86;
-            this.check_Layers.Text = "Autosplit layers (Only Simplify3D)";
-            this.check_Layers.UseVisualStyleBackColor = true;
             // 
             // check_Noarc
             // 
@@ -1438,25 +1451,34 @@ namespace GCodeRobotCSharpEdition
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(156, 38);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(201, 23);
+            this.comboBox1.TabIndex = 8;
+            this.comboBox1.Visible = false;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.MakeTP);
             this.groupBox4.Controls.Add(this.textBox1);
             this.groupBox4.Controls.Add(this.Print);
-            this.groupBox4.Location = new System.Drawing.Point(496, 78);
+            this.groupBox4.Location = new System.Drawing.Point(456, 70);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Size = new System.Drawing.Size(266, 146);
+            this.groupBox4.Size = new System.Drawing.Size(221, 98);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "MakeTP";
             // 
             // MakeTP
             // 
-            this.MakeTP.Location = new System.Drawing.Point(5, 76);
+            this.MakeTP.Location = new System.Drawing.Point(108, 61);
             this.MakeTP.Name = "MakeTP";
-            this.MakeTP.Size = new System.Drawing.Size(255, 23);
+            this.MakeTP.Size = new System.Drawing.Size(93, 23);
             this.MakeTP.TabIndex = 10;
             this.MakeTP.Text = "MakeTp";
             this.MakeTP.UseVisualStyleBackColor = true;
@@ -1464,14 +1486,14 @@ namespace GCodeRobotCSharpEdition
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 50);
+            this.textBox1.Location = new System.Drawing.Point(6, 21);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(195, 23);
             this.textBox1.TabIndex = 9;
             // 
             // Print
             // 
-            this.Print.Location = new System.Drawing.Point(6, 20);
+            this.Print.Location = new System.Drawing.Point(6, 61);
             this.Print.Name = "Print";
             this.Print.Size = new System.Drawing.Size(92, 23);
             this.Print.TabIndex = 8;
@@ -1498,6 +1520,7 @@ namespace GCodeRobotCSharpEdition
             this.button2.TabIndex = 5;
             this.button2.Text = "updates states";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // SendTp
@@ -1522,7 +1545,7 @@ namespace GCodeRobotCSharpEdition
             this.NewRobot.Name = "NewRobot";
             this.NewRobot.Size = new System.Drawing.Size(201, 23);
             this.NewRobot.TabIndex = 3;
-            this.NewRobot.Text = "192.168.8.100";
+            this.NewRobot.Text = "192.168.8.101";
             // 
             // label23
             // 
@@ -1547,38 +1570,38 @@ namespace GCodeRobotCSharpEdition
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Address,
             this.State});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.Location = new System.Drawing.Point(3, 70);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(402, 384);
@@ -1646,14 +1669,6 @@ namespace GCodeRobotCSharpEdition
             this.настройкиToolStripMenuItem.Text = "Настройки";
             this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(156, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(201, 23);
-            this.comboBox1.TabIndex = 8;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1669,6 +1684,8 @@ namespace GCodeRobotCSharpEdition
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1831,8 +1848,9 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.Button MakeTP;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button Print;
-        private System.Windows.Forms.CheckBox Second_pass;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox Laser_pass;
     }
 }
 

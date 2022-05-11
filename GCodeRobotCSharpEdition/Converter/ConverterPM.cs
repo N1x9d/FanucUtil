@@ -457,9 +457,9 @@ namespace GCodeRobotCSharpEdition
                 starter.Add("OWNER       = MNEDITOR;");
                 starter.Add("CREATE      = DATE 100-11-20  TIME 09:43:21;");
                 starter.Add("MODIFIED    = DATE 100-12-05  TIME 05:26:29;");
-            if (_form.SecondPass)
-                line = "LINE_COUNT = " + _pointcount * 2 + ";";
-            else
+            //if (_form.SecondPass)
+            //    line = "LINE_COUNT = " + _pointcount * 2 + ";";
+            //else
                 line = "LINE_COUNT = " + _pointcount + ";";
             starter.Add(line);
                 starter.Add("PROTECT     = READ_WRITE;");
@@ -477,11 +477,11 @@ namespace GCodeRobotCSharpEdition
                     sw.WriteLine(starter[i]);
                 for (int i = 0; i < header.Count; ++i)
                     sw.WriteLine(header[i]);
-                if (_form.SecondPass)
-                {
-                    for (int i = 0; i < header.Count; ++i)
-                        sw.WriteLine(header2[i]);
-                }
+                //if (_form.SecondPass)
+                //{
+                //    for (int i = 0; i < header.Count; ++i)
+                //        sw.WriteLine(header2[i]);
+                //}
                 if (!_closed)
                 {
                     var numb = _filepart + 1;
@@ -495,14 +495,14 @@ namespace GCodeRobotCSharpEdition
                     sw.WriteLine(footer[i]);
 
                 }
-                if (_form.SecondPass)
-                {
-                    for (int i = 0; i < footer.Count; ++i)
-                    {
-                        sw.WriteLine(footer2[i]);
+                //if (_form.SecondPass)
+                //{
+                //    for (int i = 0; i < footer.Count; ++i)
+                //    {
+                //        sw.WriteLine(footer2[i]);
                         
-                    }
-                }
+                //    }
+                //}
                 sw.WriteLine("/END");
 
                 sw.Close();
@@ -672,56 +672,74 @@ namespace GCodeRobotCSharpEdition
             }
             }
 
-            public void on_btn_Process_clicked()
+        public void on_btn_Process_clicked()
+        {
+
+            _current.a = 0;
+            _current.b = 0;
+            _current.c = 0;
+            _current.x = 0;
+            _current.y = 0;
+            _current.z = 0;
+            _current.e = 0;
+            _current.feedrate = 0;
+            _current.states = "p";
+            point c;
+            c.movment = false;
+            c.coord = _current;
+
+            positioner.j1 = 0;
+            positioner.j2 = 0;
+            c.positioner = positioner;
+            LayerPoints.Add(c);
+            _previous = _current;
+            header.Clear();
+            footer.Clear();
+            _pointcount = 0;
+
+            string inputFile = _form.Input;
+            _closed = false;
+            _filepart = 0;
+
+            StreamReader sr = new StreamReader(inputFile);
+            while (!sr.EndOfStream)
             {
-
-                _current.a = 0;
-                _current.b = 0;
-                _current.c = 0;
-                _current.x = 0;
-                _current.y = 0;
-                _current.z = 0;
-                _current.e = 0;
-                _current.feedrate = 0;
-                _current.states = "p";
-                point c;
-                c.movment = false;
-                c.coord = _current;
-
-                positioner.j1 = 0;
-                positioner.j2 = 0;
-                c.positioner = positioner;
-                LayerPoints.Add(c);
-                _previous = _current;
-                header.Clear();
-                footer.Clear();
-                _pointcount = 0;
-
-                string inputFile = _form.Input;
-                _closed = false;
-                _filepart = 0;
-
-                StreamReader sr = new StreamReader(inputFile);
-                while (!sr.EndOfStream)
-                {
                     
-                    string line = sr.ReadLine();
-                    if (!line.Contains("#"))
+                string line = sr.ReadLine();
+                
+                if (!line.Contains("#"))
+                {
+                    gcode_process(line);
+                       
+                    if (_pointcount >= (float)Convert.ToDouble(_form.esplit) && !_form.CheckLayer)
                     {
-                        gcode_process(line);
+                        robot_flush_to_file();
+                        _pointcount = 0;
+                    }
+                }   
+            }
 
-                        if (_pointcount >= (float)Convert.ToDouble(_form.esplit))
-                        {
-                            robot_flush_to_file();
-                            _pointcount = 0;
-                        }
-                    }   
-                }
-
-                sr.Close();
-
-                _closed = true;
-                ferstLine = true;
+            sr.Close();
+            robot_flush_to_file();
+            _closed = true;
+            ferstLine = true;
+            string outDir = _form.outFile.Substring(0, _form.outFile.LastIndexOf('\\')) + "layers";
+            if (_form.CheckLayer)
+            {
+                ProcessStartInfo psipy = new ProcessStartInfo();
+                psipy.CreateNoWindow = true;
+                psipy.WindowStyle = ProcessWindowStyle.Normal;
+                string cmdString = @$"python Scrypts\Slicer.py {_form.outFile} ";
+                
+                cmdString += outDir;
+                if (_form.LaserPass)
+                    cmdString += " d";
+                Process Slice = new Process();
+                psipy.FileName = "cmd";
+                psipy.Arguments = cmdString;
+                Slice.StartInfo = psipy;
+                Slice.Start();
+            }
                 MessageBox.Show("done");
                 Process PrFolder = new Process();
                 ProcessStartInfo psi = new ProcessStartInfo();
@@ -729,10 +747,10 @@ namespace GCodeRobotCSharpEdition
                 psi.CreateNoWindow = true;
                 psi.WindowStyle = ProcessWindowStyle.Normal;
                 psi.FileName = "explorer";
-                psi.Arguments = @"/n, /select, " + file;
+                psi.Arguments = @"/n, /select, " + outDir;
                 PrFolder.StartInfo = psi;
                 PrFolder.Start();
-                robot_flush_to_file();
+                
 
             }
 

@@ -88,16 +88,17 @@ namespace GCodeRobotCSharpEdition
         {
             get { return check_Weldspeed.Checked; }
         }
-        public bool ChechkLayer
+        public bool CheckLayer
         {
             get { return check_Layers.Checked; }
         }
+        public bool LaserPass { get { return Laser_pass.Checked; } }
         public string unit
         {
             get { return edit_Units.Text; }
         }
 
-        public bool SecondPass { get{ return Second_pass.Checked;  } }
+        //public bool SecondPass { get{ return Second_pass.Checked;  } }
 
         public string esplit
         {
@@ -694,6 +695,21 @@ namespace GCodeRobotCSharpEdition
                     UseShellExecute = true
                 };
                 Process.Start(startInfo);
+            }
+        }
+
+        private void check_Layers_CheckedChanged(object sender, EventArgs e)
+        {
+            if (check_Layers.Checked)
+            {
+                edit_Split.ReadOnly= true;
+                Laser_pass.Enabled=true;
+            }
+            else
+            {
+                edit_Split.ReadOnly = false;
+                Laser_pass.Enabled = false;
+
             }
         }
     }

@@ -603,7 +603,7 @@ namespace GCodeRobotCSharpEdition
                         }
                         
                     }
-                    if (_form.ChechkLayer)
+                    if (_form.CheckLayer)
                     {
                         robot_flush_to_file();
                         _pointcount = 0;
