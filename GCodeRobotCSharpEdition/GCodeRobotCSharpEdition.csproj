@@ -9,6 +9,10 @@
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AutoClosingMessageBox" Version="1.0.0.2" />
     <PackageReference Include="libagg" Version="2.8.14" />

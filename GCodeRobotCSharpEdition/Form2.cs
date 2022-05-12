@@ -30,8 +30,7 @@ namespace GCodeRobotCSharpEdition
                 _curState = value;
                 
                
-               RobotState.Text = _curState.CurrentState.ToString();
-                RobotState.ForeColor = _curState.color;
+               
 
             }
         }
@@ -138,6 +137,8 @@ namespace GCodeRobotCSharpEdition
             var a = LogList.Print();
             textBox2.Text = "";
             textBox2.AppendText(a);
+            RobotState.Text = _curState.CurrentState.ToString();
+            RobotState.ForeColor = _curState.color;
             if (robot.isPrinting)
             {   
                 Print.Enabled = false;
@@ -250,7 +251,7 @@ namespace GCodeRobotCSharpEdition
         {
             if (!robot.isPrinting)
             { // CurFN.Text = "Текущий файл "+Collection.Items[0];
-                
+                myTimer.Start();
                 var gg = Collection.Items.IndexOf(Collection.Text);
                 Await_layer.Enabled = false;
                 task = new Task(() => robot.PrintAsync(Await_layer.Checked, Collection.Items[gg].ToString(), gg));
@@ -258,6 +259,7 @@ namespace GCodeRobotCSharpEdition
             }
             else 
             {
+                myTimer.Start();
                 //var a = Form1.sets.Params.Where(c => c.ParamName == "NextLayerBD").ToList();
                 //if (a.Count > 0)
                 //{
@@ -265,13 +267,13 @@ namespace GCodeRobotCSharpEdition
                 //}
                 //if (TimerWorking)
                 //{
-                    //TimerWorking = false;
-                    // PrintTimer.Stop();
-                   // timerCount = 0;
-                  // StartPrint.Text = $"Следующий файл";
-                   // Collection.Enabled = true;
-                    //Skip.Enabled = true;
-                    //Repeat.Enabled = true;
+                //TimerWorking = false;
+                // PrintTimer.Stop();
+                // timerCount = 0;
+                // StartPrint.Text = $"Следующий файл";
+                // Collection.Enabled = true;
+                //Skip.Enabled = true;
+                //Repeat.Enabled = true;
 
                 //}
                 //else
@@ -294,12 +296,14 @@ namespace GCodeRobotCSharpEdition
 
         private void Drop_Click(object sender, EventArgs e)
         {
+            myTimer.Stop();
             Await_layer.Enabled = true;
             cts.Cancel();
             StartPrint.Enabled = false;
             Collection.Enabled = true;
             textBox1.Text = "";
             Print.Enabled = true;
+            textBox2.Text = "";
             //StartPrint.Enabled = true;
             StartPrint.Text = $"Следующий файл";
             //robot.ChechTest();

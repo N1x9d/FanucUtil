@@ -380,7 +380,8 @@ namespace GCodeRobotCSharpEdition
                     line += "P = " + Conv + " deg, ";
                 value = float.Parse(_form.R, CultureInfo.InvariantCulture.NumberFormat) + ( 0);
                     Conv = Math.Round(value, 1).ToString(myCIintl);
-                    footer.Add(line);
+                line += "R = " + Conv + " deg ";
+                footer.Add(line);
                 //Второй проход
                 //value = float.Parse(_form.W, CultureInfo.InvariantCulture.NumberFormat) + y;
                 //    Conv = Math.Round(value, 1).ToString(myCIintl);
@@ -640,7 +641,7 @@ namespace GCodeRobotCSharpEdition
                     c.positioner = positioner;
                     LayerPoints.Add(c);
                     robot_add_move_linear();
-                    if (_pointcount >= (float)Convert.ToDouble(_form.esplit))
+                    if (_pointcount >= (float)Convert.ToDouble(_form.esplit) && !_form.CheckLayer)
                     {
                         robot_flush_to_file();
                         _pointcount = 0;
@@ -723,15 +724,20 @@ namespace GCodeRobotCSharpEdition
             robot_flush_to_file();
             _closed = true;
             ferstLine = true;
-            string outDir = _form.outFile.Substring(0, _form.outFile.LastIndexOf('\\')) + "layers";
+            string outDir = _form.outFile.Substring(0, _form.outFile.LastIndexOf('\\'));
+            outDir=outDir.Substring(0, outDir.LastIndexOf('\\')+1)+"layers";
+            if (!Directory.Exists(outDir))
+            {
+                Directory.CreateDirectory(outDir);
+            }
             if (_form.CheckLayer)
             {
-                ProcessStartInfo psipy = new ProcessStartInfo();
-                psipy.CreateNoWindow = true;
-                psipy.WindowStyle = ProcessWindowStyle.Normal;
-                string cmdString = @$"python Scrypts\Slicer.py {_form.outFile} ";
                 
-                cmdString += outDir;
+                ProcessStartInfo psipy = new ProcessStartInfo();
+                psipy.CreateNoWindow = false;
+                psipy.WindowStyle = ProcessWindowStyle.Normal;
+                string inputDir = _form.outFile.Substring(0, _form.outFile.LastIndexOf('\\'));
+                string cmdString = @$"/k ""python Scrypts\Slicer.py {inputDir} {outDir}""";
                 if (_form.LaserPass)
                     cmdString += " d";
                 Process Slice = new Process();

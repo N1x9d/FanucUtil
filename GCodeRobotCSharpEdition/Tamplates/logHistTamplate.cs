@@ -58,7 +58,7 @@ namespace GCodeRobotCSharpEdition.Tamplates
                 return val;
             else
             {
-                string outVal = $"cur z={Z} min z = {MinZ} max z = {MaxZ} avgZ = {AvgZ}";
+                string outVal = $"cur z={Z} /r/nmin z = {MinZ} /r/nmax z = {MaxZ} /r/navgZ = {AvgZ}";
                 return outVal;
             }
         }
