@@ -90,8 +90,8 @@ namespace GCodeRobotCSharpEdition.Robot
             sendtoServ(sTmpl);
             printing = true;
             PrParam.curnumb = fid;
-            stateTempl.CurrentState = $"Printing file {PrParam.curnumb+1}/{PrParam.count}";
-            LogList.Add(1, $"Printing file { PrParam.curnumb+1}/{ PrParam.count}");
+            stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
+            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
             stateTempl.color = Color.Green;
 
             form.CurState = stateTempl;
@@ -122,16 +122,16 @@ namespace GCodeRobotCSharpEdition.Robot
                         if (userResult == System.Windows.Forms.DialogResult.Yes)
                         {
                             
-                            PrParam.curnumb++;
+
                             if (PrParam.curnumb  == PrParam.count)
                             {
                                 sTmpl.is_start = true.ToString();
                                 sTmpl.stop_after_layer = await_layer.ToString();
                                 sTmpl.is_last_file = true.ToString();
-                                
-                                sTmpl.current_file_path =PrParam.filename + $"_{ PrParam.curnumb+1}" + extension;
-                                LogList.Add(1, $"Printing file { PrParam.curnumb+1}/{ PrParam.count}");
-                                FTPLoad(PrParam.filename + $"_{ PrParam.curnumb+1}" + extension, PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb }" + extension);
+                                PrParam.curnumb++;
+                                sTmpl.current_file_path =PrParam.filename + $"_{ PrParam.curnumb }" + extension;
+                                LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
+                                FTPLoad(PrParam.filename + $"_{ PrParam.curnumb }" + extension, PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb }" + extension);
                                 sendtoServ(sTmpl);
                                 printing = true;
                                 lastFile = true;
@@ -139,14 +139,14 @@ namespace GCodeRobotCSharpEdition.Robot
                             else
                             {
                                 sTmpl.is_start = true.ToString();
-                                
+                                PrParam.curnumb++;
                                 sTmpl.stop_after_layer = await_layer.ToString();
-                                sTmpl.current_file_path =  PrParam.filename + $"_{ PrParam.curnumb+1}" + extension;
-                                FTPLoad(PrParam.filename + $"_{ PrParam.curnumb+1}" + extension, PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb }" + extension);
+                                sTmpl.current_file_path =  PrParam.filename + $"_{ PrParam.curnumb }" + extension;
+                                FTPLoad(PrParam.filename + $"_{ PrParam.curnumb }" + extension, PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb }" + extension);
                                 printing = true;
                                 sendtoServ(sTmpl);
                             }
-                            //PrParam.curnumb++;
+                            PrParam.curnumb++;
                             Thread.Sleep(2000);
                             LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
                             stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
@@ -426,10 +426,10 @@ namespace GCodeRobotCSharpEdition.Robot
             }
         private void FTPLoad(string fileName,string pathWay)
         {
-            WebClient client = new WebClient();
-            client.Credentials = new NetworkCredential("pi", "8");
-            client.UploadFile(
-                $"ftp://{Addres}/files/{fileName}", $"{pathWay}");
+            //WebClient client = new WebClient();
+            //client.Credentials = new NetworkCredential("pi", "8");
+            //client.UploadFile(
+            //    $"ftp://{Addres}/files/{fileName}", $"{pathWay}");
 
         }
 

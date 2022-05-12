@@ -36,14 +36,12 @@ try:
     path = 'data'
     output_path = 'output_data'
 
-    if len(sys.argv) == 1:
+    if len(sys.argv) > 1:
         path = sys.argv[1].replace('\\', '/')
-        print(path)
     
     elif len(sys.argv) >= 3:
         path = sys.argv[1]
         output_path = sys.argv[2]
-        print(output_path)
 
 
     if len(sys.argv) == 4:
