@@ -380,7 +380,8 @@ namespace GCodeRobotCSharpEdition
                     line += "P = " + Conv + " deg, ";
                 value = float.Parse(_form.R, CultureInfo.InvariantCulture.NumberFormat) + ( 0);
                     Conv = Math.Round(value, 1).ToString(myCIintl);
-                    footer.Add(line);
+                line += "R = " + Conv + " deg ";
+                footer.Add(line);
                 //Второй проход
                 //value = float.Parse(_form.W, CultureInfo.InvariantCulture.NumberFormat) + y;
                 //    Conv = Math.Round(value, 1).ToString(myCIintl);

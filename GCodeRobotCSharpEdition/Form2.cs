@@ -30,8 +30,7 @@ namespace GCodeRobotCSharpEdition
                 _curState = value;
                 
                
-               RobotState.Text = _curState.CurrentState.ToString();
-                RobotState.ForeColor = _curState.color;
+              
 
             }
         }
@@ -138,6 +137,9 @@ namespace GCodeRobotCSharpEdition
             var a = LogList.Print();
             textBox2.Text = "";
             textBox2.AppendText(a);
+            RobotState.Text = _curState.CurrentState.ToString();
+            RobotState.ForeColor = _curState.color;
+
             if (robot.isPrinting)
             {   
                 Print.Enabled = false;
@@ -250,7 +252,7 @@ namespace GCodeRobotCSharpEdition
         {
             if (!robot.isPrinting)
             { // CurFN.Text = "Текущий файл "+Collection.Items[0];
-                
+                myTimer.Start();
                 var gg = Collection.Items.IndexOf(Collection.Text);
                 Await_layer.Enabled = false;
                 task = new Task(() => robot.PrintAsync(Await_layer.Checked, Collection.Items[gg].ToString(), gg));
@@ -284,6 +286,7 @@ namespace GCodeRobotCSharpEdition
                     //PrintTimer.Interval = 1000;
                     //PrintTimer.Start();
                 }
+                myTimer.Start();
                 var gg = Collection.Items.IndexOf(Collection.Text);
                 var task = new Task(() => robot.printNext(Collection.Items[gg].ToString(), gg));
                 task.Start();
@@ -294,16 +297,18 @@ namespace GCodeRobotCSharpEdition
 
         private void Drop_Click(object sender, EventArgs e)
         {
+            myTimer.Stop();
             Await_layer.Enabled = true;
             cts.Cancel();
             StartPrint.Enabled = false;
             Collection.Enabled = true;
             textBox1.Text = "";
             Print.Enabled = true;
+            textBox2.Text = "";
             //StartPrint.Enabled = true;
             StartPrint.Text = $"Следующий файл";
             //robot.ChechTest();
-            
+
         }
         /// <summary>
         /// next

@@ -58,7 +58,7 @@ namespace GCodeRobotCSharpEdition.Tamplates
                 return val;
             else
             {
-                string outVal = $"cur z={Z} min z = {MinZ} max z = {MaxZ} avgZ = {AvgZ}";
+                string outVal = $"cur z={Z}"+Environment.NewLine+ $"min z = {MinZ}" + Environment.NewLine + $"max z = {MaxZ}" + Environment.NewLine + $"avgZ = {AvgZ}";
                 return outVal;
             }
         }
