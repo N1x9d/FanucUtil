@@ -41,6 +41,7 @@ namespace GCodeRobotCSharpEdition
             this.button3 = new System.Windows.Forms.Button();
             this.Prev = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TpAll = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // Print
@@ -82,7 +83,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // MakeTP
             // 
-            this.MakeTP.Location = new System.Drawing.Point(209, 151);
+            this.MakeTP.Location = new System.Drawing.Point(27, 181);
             this.MakeTP.Name = "MakeTP";
             this.MakeTP.Size = new System.Drawing.Size(132, 25);
             this.MakeTP.TabIndex = 8;
@@ -160,11 +161,22 @@ namespace GCodeRobotCSharpEdition
             this.textBox2.Size = new System.Drawing.Size(274, 222);
             this.textBox2.TabIndex = 16;
             // 
+            // TpAll
+            // 
+            this.TpAll.AutoSize = true;
+            this.TpAll.Location = new System.Drawing.Point(187, 185);
+            this.TpAll.Name = "TpAll";
+            this.TpAll.Size = new System.Drawing.Size(136, 19);
+            this.TpAll.TabIndex = 17;
+            this.TpAll.Text = "Экспортировать все";
+            this.TpAll.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 248);
+            this.Controls.Add(this.TpAll);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.Prev);
             this.Controls.Add(this.button3);
@@ -199,5 +211,6 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button Prev;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.CheckBox TpAll;
     }
 }

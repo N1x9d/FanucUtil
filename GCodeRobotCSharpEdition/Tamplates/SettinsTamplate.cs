@@ -75,5 +75,10 @@ namespace GCodeRobotCSharpEdition.Tamplates
             }
         }
 
+        public Param GetParamByName(string pName)
+        {
+            return Params.Where(c=>c.ParamName== pName).ToArray()[0];
+        }
+
     }
 }

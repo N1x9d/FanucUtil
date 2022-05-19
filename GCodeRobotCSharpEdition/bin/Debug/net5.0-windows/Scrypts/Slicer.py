@@ -36,12 +36,14 @@ try:
     path = 'data'
     output_path = 'output_data'
 
-    if len(sys.argv) > 1:
+    if len(sys.argv) == 2:
         path = sys.argv[1].replace('\\', '/')
+        print(path)
     
     elif len(sys.argv) >= 3:
         path = sys.argv[1]
         output_path = sys.argv[2]
+        print(output_path)
 
 
     if len(sys.argv) == 4:
@@ -164,8 +166,8 @@ try:
                 lines_number = len(collected_data[layer])
                 for data in collected_data[layer]:
                     if isinstance(data, list):
-                        file.write(':SR[23]=$SCR_GRP[1].$MCH_POS_X;\n')
-                        file.write(':SR[24]=$SCR_GRP[1].$MCH_POS_Y;\n')
+                        #file.write(':SR[23]=$SCR_GRP[1].$MCH_POS_X;\n')
+                        #file.write(':SR[24]=$SCR_GRP[1].$MCH_POS_Y;\n')
 
                         data_parts = data[0].copy()
                         line_number = int(data_parts[0][:-1])

@@ -10,15 +10,18 @@ using GCodeRobotCSharpEdition.Robot;
 using System.Diagnostics;
 using System.Threading;
 using GCodeRobotCSharpEdition.Tamplates;
+using NetMQ.Sockets;
+using NetMQ;
 
 namespace GCodeRobotCSharpEdition
 {
     public partial class Form2 : Form
     {
+        public string PrPatch { get; set; }
         public static CancellationTokenSource cts = new CancellationTokenSource(); 
         public CancellationToken ct= cts.Token;
         private StateTempl _curState= new StateTempl("Ready to print",Color.Green);
-        
+        private bool _isTranslating;
         public StateTempl CurState
         {
             get
@@ -36,6 +39,62 @@ namespace GCodeRobotCSharpEdition
         }
         public RobotTamplate robot;
         private System.Windows.Forms.Timer myTimer;
+
+        private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
+        {
+            RobotState.Text = CurState.CurrentState;
+            RobotState.ForeColor = CurState.color;
+            //robot.ChechConnection();
+            var a = LogList.Print();
+            textBox2.Text = "";
+            textBox2.AppendText(a);
+            RobotState.Text = _curState.CurrentState.ToString();
+            RobotState.ForeColor = _curState.color;
+
+            if (robot.isPrinting)
+            {
+                Print.Enabled = false;
+                //StartPrint.Enabled = false;
+                if (Await_layer.Checked)
+                    if (robot.SendNextFile)
+                    {
+                        //myTimer.Stop();
+                        StartPrint.Enabled = true;
+                        Collection.Enabled = true;
+                        //Repeat.Enabled = true;
+                        //Skip.Enabled = true;
+                    }
+                    else
+                    {
+
+                        StartPrint.Enabled = false;
+                        Collection.Enabled = false;
+                        //PrintNext.Text = "Print next";
+                        //Repeat.Enabled = false;
+                        //Repeat.Text = "Repeat layer";
+                        //Skip.Enabled = false;
+                        //Skip.Text = "Skip Layer";
+                    }
+
+            }
+            else
+            {
+                Print.Enabled = true;
+                Collection.Enabled = true;
+            }
+            if (_isTranslating)
+            {
+                using (var client = new RequestSocket())
+                {
+                    client.Connect($"tcp://localhost:5001");
+                    client.SendFrame($"states");
+                    var msg2 = client.ReceiveFrameString();
+                    LogList.Add(3, msg2);
+                }
+            }
+
+        }
+
         public Form2(string ip, RobotTamplate rtmpl)
         {
             InitializeComponent();
@@ -66,7 +125,7 @@ namespace GCodeRobotCSharpEdition
 
             if (FBD.ShowDialog() == DialogResult.OK)
             {
-
+                PrPatch = FBD.SelectedPath;
                 var dirName = FBD.SelectedPath.Substring(FBD.SelectedPath.LastIndexOf("\\") + 1);
                 textBox1.Text= dirName;
                 var filesCount = GetLSCount(FBD.SelectedPath);
@@ -119,61 +178,8 @@ namespace GCodeRobotCSharpEdition
                  TimerWorking = false;
                  task.Start();
                 
-                    
-               
-
-                
             }
         }
-
-
-
-
-        private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
-        {
-            RobotState.Text = CurState.CurrentState;
-            RobotState.ForeColor = CurState.color;
-            //robot.ChechConnection();
-            var a = LogList.Print();
-            textBox2.Text = "";
-            textBox2.AppendText(a);
-            RobotState.Text = _curState.CurrentState.ToString();
-            RobotState.ForeColor = _curState.color;
-
-            if (robot.isPrinting)
-            {   
-                Print.Enabled = false;
-                //StartPrint.Enabled = false;
-                if (Await_layer.Checked)
-                    if (robot.SendNextFile)
-                    {
-                        myTimer.Stop();
-                        StartPrint.Enabled = true;
-                        Collection.Enabled = true;
-                        //Repeat.Enabled = true;
-                        //Skip.Enabled = true;
-                    }
-                    else
-                    {
-
-                        StartPrint.Enabled = false;
-                        Collection.Enabled = false;
-                        //PrintNext.Text = "Print next";
-                        //Repeat.Enabled = false;
-                        //Repeat.Text = "Repeat layer";
-                        //Skip.Enabled = false;
-                        //Skip.Text = "Skip Layer";
-                    }
-
-            }
-            else
-            {
-                Print.Enabled = true;
-                Collection.Enabled = true;
-            }
-            
-        }
-
 
         private int GetLSCount(string patch)
         {
@@ -211,52 +217,80 @@ namespace GCodeRobotCSharpEdition
         public Task task { get; set; }
         private void MakeTP_Click(object sender, EventArgs e)
         {
-            var fileContent = string.Empty;
-            OpenFileDialog FBD = new OpenFileDialog();
-            FBD.Filter = "ls files (*.ls)|*.ls|All files (*.*)|*.*";
-            FBD.FilterIndex = 2;
-            FBD.RestoreDirectory = true;
-            //MessageBox.Show("Функция не протестирована!!! но должна роаботать");
-            if (FBD.ShowDialog() == DialogResult.OK)
+            if (!TpAll.Checked)
             {
-                //Get the path of specified file
-               var filePath = FBD.FileName;
-                var fileDir = filePath.Substring(0, filePath.LastIndexOf('\\'));
-                //Read the contents of the file into a stream
-                if (!System.IO.File.Exists(fileDir+ "\\robot.ini"))
+                var fileContent = string.Empty;
+                OpenFileDialog FBD = new OpenFileDialog();
+                FBD.Filter = "ls files (*.ls)|*.ls|All files (*.*)|*.*";
+                FBD.FilterIndex = 2;
+                FBD.RestoreDirectory = true;
+                //MessageBox.Show("Функция не протестирована!!! но должна роаботать");
+                if (FBD.ShowDialog() == DialogResult.OK)
                 {
-                    StreamWriter file = new StreamWriter(fileDir + "\\robot.ini");
-                    file.WriteLine("[WinOLPC_Util]");
-                    file.WriteLine("Robot=\\C\\Users\\02Robot\\Documents\\My Workcells\\Fanuc_002\\Robot_1");
-                    file.WriteLine("Version=V7.70-1");
-                    file.WriteLine(@"Path=C:\Program Files (x86)\FANUC\WinOLPC\Versions\V770-1\bin");
-                    file.WriteLine(@"Support=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\support");
-                    file.WriteLine(@"Output=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\output");
-                    file.Close();
+                    //Get the path of specified file
+                    var filePath = FBD.FileName;
+                    var fileDir = filePath.Substring(0, filePath.LastIndexOf('\\'));
+                    //Read the contents of the file into a stream
+                    if (!System.IO.File.Exists(fileDir + "\\robot.ini"))
+                    {
+                        StreamWriter file = new StreamWriter(fileDir + "\\robot.ini");
+                        file.WriteLine("[WinOLPC_Util]");
+                        file.WriteLine("Robot=\\C\\Users\\02Robot\\Documents\\My Workcells\\Fanuc_002\\Robot_1");
+                        file.WriteLine("Version=V7.70-1");
+                        file.WriteLine(@"Path=C:\Program Files (x86)\FANUC\WinOLPC\Versions\V770-1\bin");
+                        file.WriteLine(@"Support=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\support");
+                        file.WriteLine(@"Output=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\output");
+                        file.Close();
+                    }
+                    var startInfo = new ProcessStartInfo()
+                    {
+                        FileName = "cmd.exe",
+                        Arguments = @$"/k ""maketp {filePath.Substring(filePath.LastIndexOf('\\') + 1)}""",//закрываем консоль
+                        WorkingDirectory = fileDir,
+                        UseShellExecute = true
+                    };
+                    Process.Start(startInfo);
                 }
-                var startInfo = new ProcessStartInfo()
+            }
+            else
+            {
+                using (var client = new RequestSocket())
                 {
-                    FileName = "cmd.exe",
-                    Arguments = @$"/k ""maketp {filePath.Substring(filePath.LastIndexOf('\\')+1)}""",//закрываем консоль
-                    WorkingDirectory = fileDir,
-                    UseShellExecute = true
-                };
-                Process.Start(startInfo);
+                    client.Connect($"tcp://localhost:5001");
+                    client.SendFrame($"path${PrPatch}");
+                    var msg = client.ReceiveFrameString();
+                    if(msg != "1")
+                        _isTranslating=true;
+                }
             }
 
         }
-
+        
+        private void CheckTpTranslate()
+        {
+            using (var client = new RequestSocket())
+            {
+                client.Connect($"tcp://localhost:5001");
+                client.SendFrame($"path${PrPatch}");
+                var msg = client.ReceiveFrameString();
+                while (true)
+                {
+                    
+                }
+            }
+        }
        
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (!robot.isPrinting)
             { // CurFN.Text = "Текущий файл "+Collection.Items[0];
-                myTimer.Start();
+                
                 var gg = Collection.Items.IndexOf(Collection.Text);
                 Await_layer.Enabled = false;
                 task = new Task(() => robot.PrintAsync(Await_layer.Checked, Collection.Items[gg].ToString(), gg));
                 task.Start();
+                myTimer.Start();
             }
             else 
             {
@@ -286,10 +320,11 @@ namespace GCodeRobotCSharpEdition
                     //PrintTimer.Interval = 1000;
                     //PrintTimer.Start();
                 }
-                myTimer.Start();
+                
                 var gg = Collection.Items.IndexOf(Collection.Text);
                 var task = new Task(() => robot.printNext(Collection.Items[gg].ToString(), gg));
                 task.Start();
+                myTimer.Start();
             }
         }
 
@@ -308,7 +343,7 @@ namespace GCodeRobotCSharpEdition
             //StartPrint.Enabled = true;
             StartPrint.Text = $"Следующий файл";
             //robot.ChechTest();
-
+            _isTranslating = false;
         }
         /// <summary>
         /// next

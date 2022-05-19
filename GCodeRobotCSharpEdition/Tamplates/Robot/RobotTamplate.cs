@@ -93,7 +93,7 @@ namespace GCodeRobotCSharpEdition.Robot
             stateTempl.CurrentState = $"Printing file {PrParam.curnumb + 1}/{PrParam.count}";
             LogList.Add(1, $"Printing file { PrParam.curnumb + 1}/{ PrParam.count}");
             stateTempl.color = Color.Green;
-
+            PrParam.curnumb++;
             form.CurState = stateTempl;
             if (form.ct.IsCancellationRequested)
                 return;
@@ -118,11 +118,11 @@ namespace GCodeRobotCSharpEdition.Robot
                         }
 
                         SendNextFile = false;
-                        var userResult = AutoClosingMessageBox.Show("Все хорошо? Продолжаем?", "Caption", 5 * 1000, MessageBoxButtons.YesNo);
+                        var userResult = AutoClosingMessageBox.Show("Все хорошо? Продолжаем?", "Caption", int.Parse(Form1.sets.GetParamByName("NextLayerDelay").ParamValue), MessageBoxButtons.YesNo);
                         if (userResult == System.Windows.Forms.DialogResult.Yes)
                         {
 
-                            PrParam.curnumb++;
+                           // PrParam.curnumb++;
                             if (PrParam.curnumb == PrParam.count)
                             {
                                 sTmpl.is_start = true.ToString();
@@ -146,7 +146,7 @@ namespace GCodeRobotCSharpEdition.Robot
                                 printing = true;
                                 sendtoServ(sTmpl);
                             }
-                            //PrParam.curnumb++;
+                            PrParam.curnumb++;
                             Thread.Sleep(2000);
                             LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
                             stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
@@ -180,7 +180,7 @@ namespace GCodeRobotCSharpEdition.Robot
                 sendtoServ(sTmpl);
                 printing = true;
                 lastFile = true;
-                LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
+                LogList.Add(1, $"Printing file { PrParam.curnumb+1}/{ PrParam.count}");
                 form.CurState = stateTempl;
             }
             else
@@ -191,7 +191,7 @@ namespace GCodeRobotCSharpEdition.Robot
                 FTPLoad(fname, PrParam.patch + "\\" + fname);
                 sendtoServ(sTmpl);
                 printing = true;
-                LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
+                LogList.Add(1, $"Printing file { PrParam.curnumb+1}/{ PrParam.count}");
                 form.CurState = stateTempl;
             }
             PrParam.curnumb = fid + 1;

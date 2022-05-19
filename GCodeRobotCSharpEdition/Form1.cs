@@ -571,11 +571,6 @@ namespace GCodeRobotCSharpEdition
 
         }
 
-       
-        private void Await_next_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
         
 
         private void проверитьОбновленияToolStripMenuItem_Click(object sender, EventArgs e)

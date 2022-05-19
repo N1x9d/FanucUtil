@@ -206,7 +206,12 @@ namespace GCodeRobotCSharpEdition
             {
                 string termination = "";
 
-
+                coord.x = _current.x;
+                coord.y = _current.y;
+                coord.z = _current.z;
+                coord.w = _current.a;
+                coord.p = _current.b;
+                coord.r = _current.c;
 
                 if (_current.states.Contains("p")) termination = _form.Tn;
                 if (_current.states.Contains("P")) termination = _form.Tw;
@@ -322,12 +327,12 @@ namespace GCodeRobotCSharpEdition
                     footer2.Add("P[" + _pointcount*2 + "] {");
                     footer2.Add("   GP1:");
                     footer2.Add(line);
-                    coord.x = _current.x;
-                    coord.y = _current.y;
-                    coord.z = _current.z;
-                    coord.w = _current.a;
-                    coord.p = _current.b;
-                    coord.r = _current.c;
+                    // coord.x = _current.x;
+                    // coord.y = _current.y;
+                    // coord.z = _current.z;
+                    // coord.w = _current.a;
+                    // coord.p = _current.b;
+                    // coord.r = _current.c;
                 //     prevP = curP;
                 //curP = coord;
                 //if (PrevEnd && Prevstart)
@@ -361,16 +366,16 @@ namespace GCodeRobotCSharpEdition
                     footer.Add(line);
                 //Второй проход
                 line = "";
-                value = float.Parse(_form.X, CultureInfo.InvariantCulture.NumberFormat) + coord.x;
-                    Conv = Math.Round(value, 1).ToString(myCIintl);
-                    line = "      X = " + Conv + " mm, ";
-                    value = float.Parse(_form.Y, CultureInfo.InvariantCulture.NumberFormat) + coord.y;
-                    Conv = Math.Round(value, 1).ToString(myCIintl);
-                    line += "Y = " + Conv + " mm, ";
-                    value = float.Parse(_form.Z, CultureInfo.InvariantCulture.NumberFormat) + coord.z;
-                    Conv = Math.Round(value, 1).ToString(myCIintl);
-                    line += "Z = " + Conv+50 + " mm,";
-                footer2.Add(line);
+                //value = float.Parse(_form.X, CultureInfo.InvariantCulture.NumberFormat) + coord.x;
+                  //  Conv = Math.Round(value, 1).ToString(myCIintl);
+                  //  line = "      X = " + Conv + " mm, ";
+                  //  value = float.Parse(_form.Y, CultureInfo.InvariantCulture.NumberFormat) + coord.y;
+                  //  Conv = Math.Round(value, 1).ToString(myCIintl);
+                  //  line += "Y = " + Conv + " mm, ";
+                   // value = float.Parse(_form.Z, CultureInfo.InvariantCulture.NumberFormat) + coord.z;
+                   // Conv = Math.Round(value, 1).ToString(myCIintl);
+                   // line += "Z = " + Conv+50 + " mm,";
+                //footer2.Add(line);
                 //конец
                 value = float.Parse(_form.W, CultureInfo.InvariantCulture.NumberFormat) + y;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
@@ -641,7 +646,7 @@ namespace GCodeRobotCSharpEdition
                     c.positioner = positioner;
                     LayerPoints.Add(c);
                     robot_add_move_linear();
-                    if (_pointcount >= (float)Convert.ToDouble(_form.esplit))
+                    if (_pointcount >= (float)Convert.ToDouble(_form.esplit) && !_form.CheckLayer)
                     {
                         robot_flush_to_file();
                         _pointcount = 0;
@@ -724,15 +729,16 @@ namespace GCodeRobotCSharpEdition
             robot_flush_to_file();
             _closed = true;
             ferstLine = true;
-            string outDir = _form.outFile.Substring(0, _form.outFile.LastIndexOf('\\')) + "layers";
+            string outDir = _form.outFile.Substring(0, _form.outFile.LastIndexOf('\\')) ;
+            outDir = outDir.Substring(0, outDir.LastIndexOf('\\')+1) + "layer";
             if (_form.CheckLayer)
             {
                 ProcessStartInfo psipy = new ProcessStartInfo();
-                psipy.CreateNoWindow = true;
+                psipy.CreateNoWindow = false;
                 psipy.WindowStyle = ProcessWindowStyle.Normal;
-                string cmdString = @$"python Scrypts\Slicer.py {_form.outFile} ";
+                string cmdString = @$"/k ""python Scrypts\Slicer.py {_form.outFile} {outDir}""";
                 
-                cmdString += outDir;
+                //cmdString += outDir;
                 if (_form.LaserPass)
                     cmdString += " d";
                 Process Slice = new Process();
