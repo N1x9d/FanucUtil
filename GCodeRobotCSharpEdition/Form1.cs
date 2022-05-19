@@ -181,6 +181,16 @@ namespace GCodeRobotCSharpEdition
             conv = new ConverterGcode(this);
             convPM = new ConverterPM(this);
             sets = new Setting();
+            ProcessStartInfo psipy = new ProcessStartInfo();
+            psipy.CreateNoWindow = false;
+            psipy.WindowStyle = ProcessWindowStyle.Normal;
+            string cmdString = @$"/k ""python Scrypts\convert_2_tp_zmq.py """;
+
+            Process Slice = new Process();
+            psipy.FileName = "cmd";
+            psipy.Arguments = cmdString;
+            Slice.StartInfo = psipy;
+            Slice.Start();
             sets.Load();
         }
 
