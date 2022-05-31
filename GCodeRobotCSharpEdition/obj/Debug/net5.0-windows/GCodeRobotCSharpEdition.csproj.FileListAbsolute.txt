@@ -414,20 +414,6 @@ E:\NewRepo\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdit
 E:\NewRepo\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.pdb
 E:\NewRepo\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.genruntimeconfig.cache
 E:\NewRepo\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\ref\GCodeRobotCSharpEdition.dll
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.csproj.AssemblyReference.cache
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Form1.resources
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Form2.resources
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Properties.Resources.resources
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Settings.resources
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.csproj.GenerateResource.cache
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.GeneratedMSBuildEditorConfig.editorconfig
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.AssemblyInfoInputs.cache
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.AssemblyInfo.cs
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.csproj.CoreCompileInputs.cache
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.dll
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\refint\GCodeRobotCSharpEdition.dll
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.xml
-E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.pdb
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\bin\Debug\net5.0-windows\GCodeRobotCSharpEdition.exe
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\bin\Debug\net5.0-windows\GCodeRobotCSharpEdition.deps.json
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\bin\Debug\net5.0-windows\GCodeRobotCSharpEdition.runtimeconfig.json
@@ -457,6 +443,20 @@ E:\Gcode Tr PE\GCodeRobotCSharpEdition\bin\Debug\net5.0-windows\ru\System.Privat
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\bin\Debug\net5.0-windows\tr\System.Private.ServiceModel.resources.dll
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\bin\Debug\net5.0-windows\zh-Hans\System.Private.ServiceModel.resources.dll
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\bin\Debug\net5.0-windows\zh-Hant\System.Private.ServiceModel.resources.dll
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.csproj.AssemblyReference.cache
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Form1.resources
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Form2.resources
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Properties.Resources.resources
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.Settings.resources
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.csproj.GenerateResource.cache
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.GeneratedMSBuildEditorConfig.editorconfig
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.AssemblyInfoInputs.cache
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.AssemblyInfo.cs
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.csproj.CoreCompileInputs.cache
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.csproj.CopyComplete
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.dll
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\refint\GCodeRobotCSharpEdition.dll
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.xml
+E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.pdb
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\GCodeRobotCSharpEdition.genruntimeconfig.cache
 E:\Gcode Tr PE\GCodeRobotCSharpEdition\obj\Debug\net5.0-windows\ref\GCodeRobotCSharpEdition.dll
