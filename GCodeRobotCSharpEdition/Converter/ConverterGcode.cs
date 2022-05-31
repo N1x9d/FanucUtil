@@ -613,7 +613,7 @@ namespace GCodeRobotCSharpEdition
 
                 gcode_process(line);
 
-                if (_pointcount >= Convert.ToInt32(_form.esplit))
+                if (_pointcount >= Convert.ToInt32(_form.esplit) && !_form.CheckLayer)
                 {
                     robot_flush_to_file();
                     _pointcount = 0;
@@ -621,8 +621,26 @@ namespace GCodeRobotCSharpEdition
             }
 
             sr.Close();
-
+            robot_flush_to_file();
             _closed = true;
+            string outDir = _form.outFile.Substring(0, _form.outFile.LastIndexOf('\\'));
+            outDir = outDir.Substring(0, outDir.LastIndexOf('\\') + 1) + "layer";
+            if (_form.CheckLayer)
+            {
+                ProcessStartInfo psipy = new ProcessStartInfo();
+                psipy.CreateNoWindow = false;
+                psipy.WindowStyle = ProcessWindowStyle.Normal;
+                string cmdString = @$"/k ""python Scrypts\Slicer.py {_form.outFile} {outDir}""";
+
+                //cmdString += outDir;
+                if (_form.LaserPass)
+                    cmdString += " d";
+                Process Slice = new Process();
+                psipy.FileName = "cmd";
+                psipy.Arguments = cmdString;
+                Slice.StartInfo = psipy;
+                Slice.Start();
+            }
             MessageBox.Show("done");
             Process PrFolder = new Process();
             ProcessStartInfo psi = new ProcessStartInfo();

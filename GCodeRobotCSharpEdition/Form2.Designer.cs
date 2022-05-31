@@ -41,11 +41,13 @@ namespace GCodeRobotCSharpEdition
             this.button3 = new System.Windows.Forms.Button();
             this.Prev = new System.Windows.Forms.Button();
             this.TpAll = new System.Windows.Forms.CheckBox();
+            this.rIP = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Print
             // 
-            this.Print.Location = new System.Drawing.Point(239, 52);
+            this.Print.Location = new System.Drawing.Point(239, 71);
             this.Print.Name = "Print";
             this.Print.Size = new System.Drawing.Size(102, 23);
             this.Print.TabIndex = 0;
@@ -56,7 +58,7 @@ namespace GCodeRobotCSharpEdition
             // Await_layer
             // 
             this.Await_layer.AutoSize = true;
-            this.Await_layer.Location = new System.Drawing.Point(239, 85);
+            this.Await_layer.Location = new System.Drawing.Point(239, 104);
             this.Await_layer.Name = "Await_layer";
             this.Await_layer.Size = new System.Drawing.Size(84, 19);
             this.Await_layer.TabIndex = 4;
@@ -66,7 +68,7 @@ namespace GCodeRobotCSharpEdition
             // RobotState
             // 
             this.RobotState.AutoSize = true;
-            this.RobotState.Location = new System.Drawing.Point(27, 25);
+            this.RobotState.Location = new System.Drawing.Point(27, 9);
             this.RobotState.Name = "RobotState";
             this.RobotState.Size = new System.Drawing.Size(38, 15);
             this.RobotState.TabIndex = 5;
@@ -74,7 +76,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(27, 52);
+            this.textBox1.Location = new System.Drawing.Point(27, 71);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(206, 23);
@@ -82,7 +84,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // MakeTP
             // 
-            this.MakeTP.Location = new System.Drawing.Point(27, 181);
+            this.MakeTP.Location = new System.Drawing.Point(27, 197);
             this.MakeTP.Name = "MakeTP";
             this.MakeTP.Size = new System.Drawing.Size(132, 25);
             this.MakeTP.TabIndex = 8;
@@ -93,7 +95,7 @@ namespace GCodeRobotCSharpEdition
             // StartPrint
             // 
             this.StartPrint.Enabled = false;
-            this.StartPrint.Location = new System.Drawing.Point(27, 151);
+            this.StartPrint.Location = new System.Drawing.Point(27, 167);
             this.StartPrint.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.StartPrint.Name = "StartPrint";
             this.StartPrint.Size = new System.Drawing.Size(132, 25);
@@ -106,14 +108,14 @@ namespace GCodeRobotCSharpEdition
             // 
             this.Collection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Collection.FormattingEnabled = true;
-            this.Collection.Location = new System.Drawing.Point(27, 81);
+            this.Collection.Location = new System.Drawing.Point(27, 100);
             this.Collection.Name = "Collection";
             this.Collection.Size = new System.Drawing.Size(206, 23);
             this.Collection.TabIndex = 9;
             // 
             // Drop
             // 
-            this.Drop.Location = new System.Drawing.Point(27, 216);
+            this.Drop.Location = new System.Drawing.Point(27, 232);
             this.Drop.Name = "Drop";
             this.Drop.Size = new System.Drawing.Size(314, 23);
             this.Drop.TabIndex = 12;
@@ -123,7 +125,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // Next
             // 
-            this.Next.Location = new System.Drawing.Point(197, 110);
+            this.Next.Location = new System.Drawing.Point(197, 129);
             this.Next.Name = "Next";
             this.Next.Size = new System.Drawing.Size(36, 23);
             this.Next.TabIndex = 13;
@@ -133,7 +135,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(95, 110);
+            this.button3.Location = new System.Drawing.Point(95, 129);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(74, 23);
             this.button3.TabIndex = 14;
@@ -143,7 +145,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // Prev
             // 
-            this.Prev.Location = new System.Drawing.Point(27, 110);
+            this.Prev.Location = new System.Drawing.Point(27, 129);
             this.Prev.Name = "Prev";
             this.Prev.Size = new System.Drawing.Size(36, 23);
             this.Prev.TabIndex = 15;
@@ -154,18 +156,37 @@ namespace GCodeRobotCSharpEdition
             // TpAll
             // 
             this.TpAll.AutoSize = true;
-            this.TpAll.Location = new System.Drawing.Point(187, 185);
+            this.TpAll.Location = new System.Drawing.Point(187, 201);
             this.TpAll.Name = "TpAll";
             this.TpAll.Size = new System.Drawing.Size(136, 19);
             this.TpAll.TabIndex = 17;
             this.TpAll.Text = "Экспортировать все";
             this.TpAll.UseVisualStyleBackColor = true;
             // 
+            // rIP
+            // 
+            this.rIP.Location = new System.Drawing.Point(27, 42);
+            this.rIP.Name = "rIP";
+            this.rIP.Size = new System.Drawing.Size(206, 23);
+            this.rIP.TabIndex = 18;
+            this.rIP.TextChanged += new System.EventHandler(this.rIP_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(239, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 15);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "ip адрес робота";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 248);
+            this.ClientSize = new System.Drawing.Size(473, 277);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.rIP);
             this.Controls.Add(this.TpAll);
             this.Controls.Add(this.Prev);
             this.Controls.Add(this.button3);
@@ -200,5 +221,7 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button Prev;
         private System.Windows.Forms.CheckBox TpAll;
+        private System.Windows.Forms.TextBox rIP;
+        private System.Windows.Forms.Label label1;
     }
 }

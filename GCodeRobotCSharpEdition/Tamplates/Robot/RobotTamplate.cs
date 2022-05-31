@@ -43,7 +43,7 @@ namespace GCodeRobotCSharpEdition.Robot
             }
         }
         public string Addres { get; set; }
-
+        public string rIP { get; set; }
         private bool lastFile = false;
         public StateTempl stateTempl;
 
@@ -51,7 +51,7 @@ namespace GCodeRobotCSharpEdition.Robot
 
         private bool isAwait = false;
         public Form2 form;
-        public RobotTamplate(string ip)
+        public RobotTamplate(string ip = "localhost" )
         {
             Addres = ip;
             stateTempl.CurrentState = "Unconnect";
@@ -61,13 +61,22 @@ namespace GCodeRobotCSharpEdition.Robot
 
         public void PrintAsync(bool await_layer, string fname, int fid)
         {
+            IPAddress address;
+            if( !IPAddress.TryParse(rIP, out address))
+            {
+                stateTempl.CurrentState = "Не правильный ip адрес";
+                
+                stateTempl.color = Color.Orange;
+                form.CurState = stateTempl;
+                return;
+            }
             lastFile = false;
             isAwait = await_layer;
 
 
             if (PrParam.count == 0)
             {
-                stateTempl.CurrentState = "Print Errore empty patch";
+                stateTempl.CurrentState = "Ошибка пустой путь к файлу";
                 LogList.Add(3, "Print Errore empty patch");
                 stateTempl.color = Color.Orange;
                 form.CurState = stateTempl;
@@ -80,18 +89,18 @@ namespace GCodeRobotCSharpEdition.Robot
 
             if (await_layer)
             {
-                sTmpl.current_file_path = fname;
+                sTmpl.current_file_path = PrParam.patch + "\\" + fname;
 
             }
             else
-                sTmpl.current_file_path = fname;
+                sTmpl.current_file_path = PrParam.patch + "\\" + fname;
             FTPLoad(fname, PrParam.patch + "\\" + fname);
             isPrinting = true;
             sendtoServ(sTmpl);
             printing = true;
             PrParam.curnumb = fid;
-            stateTempl.CurrentState = $"Printing file {PrParam.curnumb + 1}/{PrParam.count}";
-            LogList.Add(1, $"Printing file { PrParam.curnumb + 1}/{ PrParam.count}");
+            stateTempl.CurrentState = $"Печатается {PrParam.curnumb + 1}/{PrParam.count}";
+            LogList.Add(1, $"Печатается { PrParam.curnumb + 1}/{ PrParam.count}");
             stateTempl.color = Color.Green;
             PrParam.curnumb++;
             form.CurState = stateTempl;
@@ -130,7 +139,7 @@ namespace GCodeRobotCSharpEdition.Robot
                                 sTmpl.stop_after_layer = await_layer.ToString();
                                 sTmpl.is_last_file = true.ToString();
 
-                                sTmpl.current_file_path = PrParam.filename + $"_{ PrParam.curnumb + 1}" + extension;
+                                sTmpl.current_file_path = PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb + 1}" + extension;
                                 LogList.Add(1, $"Printing file { PrParam.curnumb + 1}/{ PrParam.count}");
                                 FTPLoad(PrParam.filename + $"_{ PrParam.curnumb + 1}" + extension, PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb }" + extension);
                                 sendtoServ(sTmpl);
@@ -142,15 +151,15 @@ namespace GCodeRobotCSharpEdition.Robot
                                 sTmpl.is_start = true.ToString();
 
                                 sTmpl.stop_after_layer = await_layer.ToString();
-                                sTmpl.current_file_path = PrParam.filename + $"_{ PrParam.curnumb + 1}" + extension;
+                                sTmpl.current_file_path = PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb + 1}" + extension;
                                 FTPLoad(PrParam.filename + $"_{ PrParam.curnumb + 1}" + extension, PrParam.patch + "\\" + PrParam.filename + $"_{ PrParam.curnumb }" + extension);
                                 printing = true;
                                 sendtoServ(sTmpl);
                             }
                             PrParam.curnumb++;
                             Thread.Sleep(2000);
-                            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
-                            stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
+                            LogList.Add(1, $"Печатается { PrParam.curnumb}/{ PrParam.count}");
+                            stateTempl.CurrentState = $"Печатается {PrParam.curnumb}/{PrParam.count}";
                             stateTempl.color = Color.Green;
 
                             form.CurState = stateTempl;
@@ -176,23 +185,23 @@ namespace GCodeRobotCSharpEdition.Robot
             {
                 sTmpl.is_start = true.ToString();
                 sTmpl.is_last_file = true.ToString();
-                sTmpl.current_file_path = fname;
+                sTmpl.current_file_path = PrParam.patch + "\\" + fname;
                 FTPLoad(fname, PrParam.patch + "\\" + fname);
                 sendtoServ(sTmpl);
                 printing = true;
                 lastFile = true;
-                LogList.Add(1, $"Printing file { PrParam.curnumb+1}/{ PrParam.count}");
+                LogList.Add(1, $"Печатается { PrParam.curnumb+1}/{ PrParam.count}");
                 form.CurState = stateTempl;
             }
             else
             {
                 sTmpl.is_start = true.ToString();
 
-                sTmpl.current_file_path = fname;
+                sTmpl.current_file_path = PrParam.patch + "\\" + fname;
                 FTPLoad(fname, PrParam.patch + "\\" + fname);
                 sendtoServ(sTmpl);
                 printing = true;
-                LogList.Add(1, $"Printing file { PrParam.curnumb+1}/{ PrParam.count}");
+                LogList.Add(1, $"Печатается { PrParam.curnumb+1}/{ PrParam.count}");
                 form.CurState = stateTempl;
             }
             PrParam.curnumb = fid + 1;
@@ -220,7 +229,7 @@ namespace GCodeRobotCSharpEdition.Robot
                 if (msg != "1")
                 {
                     stateTempl.color = Color.Red;
-                    stateTempl.CurrentState = "format errore ";
+                    stateTempl.CurrentState = "Ошибка обработки данных";
                     form.CurState = stateTempl;
                 }
             }
@@ -259,7 +268,7 @@ namespace GCodeRobotCSharpEdition.Robot
                 {
                     case "0":
                         stateTempl.color = Color.Green;
-                        stateTempl.CurrentState = "Ready to print";
+                        stateTempl.CurrentState = "Готов";
                         //lastState = state;
                         LogList.Add(1, "Ready to print");
                         form.CurState = stateTempl;
@@ -277,8 +286,8 @@ namespace GCodeRobotCSharpEdition.Robot
                         lastState = state;
                         if (z == "0")
                         {
-                            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
-                            stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
+                            LogList.Add(1, $"Печатается { PrParam.curnumb}/{ PrParam.count}");
+                            stateTempl.CurrentState = $"Печатается {PrParam.curnumb}/{PrParam.count}";
                         }
                         else
                         {
@@ -295,8 +304,8 @@ namespace GCodeRobotCSharpEdition.Robot
                         lastState = state;
                         if (z == "0")
                         {
-                            LogList.Add(1, $"Printing file { PrParam.curnumb}/{ PrParam.count}");
-                            stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}";
+                            LogList.Add(1, $"Печатается { PrParam.curnumb}/{ PrParam.count}");
+                            stateTempl.CurrentState = $"Печатается {PrParam.curnumb}/{PrParam.count}";
                         }
                         else
                         {
@@ -310,7 +319,7 @@ namespace GCodeRobotCSharpEdition.Robot
                         break;
                     default:
                         stateTempl.color = Color.Red;
-                        stateTempl.CurrentState = "Connection errore";
+                        stateTempl.CurrentState = "Ошибка соединения";
                         form.CurState = stateTempl;
                         SendNextFile = false;
                         break;
@@ -356,18 +365,18 @@ namespace GCodeRobotCSharpEdition.Robot
                 {
                     case "0":
                         stateTempl.color = Color.Green;
-                        stateTempl.CurrentState = "Ready to print";
+                        stateTempl.CurrentState = "Готов";
                         //form.ll.Add(1, "Ready to print");
                         //form.CurState = stateTempl;
                         break;
                     case "1":
                         stateTempl.color = Color.Green;
-                        stateTempl.CurrentState = $"Printing file {PrParam.curnumb}/{PrParam.count}, current z={z}";
+                        stateTempl.CurrentState = $"Печатается {PrParam.curnumb}/{PrParam.count}, current z={z}";
                         //form.ll.Add(1, $"Printing file {PrParam.curnumb}/{PrParam.count}");
                         break;
                     default:
                         stateTempl.color = Color.Red;
-                        stateTempl.CurrentState = "Connection error";
+                        stateTempl.CurrentState = "Ошибка подключения";
                         LogList.Add(3, "Connection error");
                         ///переделать передачу
                         form.CurState = stateTempl;
@@ -377,61 +386,61 @@ namespace GCodeRobotCSharpEdition.Robot
 
             //form.UpdateRobotTable();
         }
-        public void ChechTest()
-        {
-            using (var client = new RequestSocket())
-            {
-                client.Connect($"tcp://{Addres}:5000");
-                client.SendFrame("states");
-                string message = client.ReceiveFrameString();
-                var state = message;
-                //string z = "0";
-                client.Connect($"tcp://{Addres}:5000");
-                client.SendFrame("states");
-                message = client.ReceiveFrameString();
+        //public void ChechTest()
+        //{
+        //    using (var client = new RequestSocket())
+        //    {
+        //        client.Connect($"tcp://{Addres}:5000");
+        //        client.SendFrame("states");
+        //        string message = client.ReceiveFrameString();
+        //        var state = message;
+        //        //string z = "0";
+        //        client.Connect($"tcp://{Addres}:5000");
+        //        client.SendFrame("states");
+        //        message = client.ReceiveFrameString();
 
-                string z = message;
-                try
-                {
-                    state = message.Substring(0, message.IndexOf(';'));
-                    z = message.Substring(message.IndexOf(';') + 1);
-                    z = z.Substring(z.IndexOf('$') + 1);
-                    state = state.Substring(state.IndexOf('$') + 1);
-                }
-                catch (Exception)
-                {
+        //        string z = message;
+        //        try
+        //        {
+        //            state = message.Substring(0, message.IndexOf(';'));
+        //            z = message.Substring(message.IndexOf(';') + 1);
+        //            z = z.Substring(z.IndexOf('$') + 1);
+        //            state = state.Substring(state.IndexOf('$') + 1);
+        //        }
+        //        catch (Exception)
+        //        {
 
-                    state = state.Substring(state.IndexOf('$') + 1);
-                }
-                //state:1(0Готов  1Печать 2Необходим файл);z:0 
-                switch (state)
-                {
-                    case "0":
-                        stateTempl.CurrentState = $" current z={z}";
-                        stateTempl.color = Color.Green;
-                        stateTempl.CurrentState = "Ready to print";
-                        //lastState = state;
-                        form.CurState = stateTempl;
+        //            state = state.Substring(state.IndexOf('$') + 1);
+        //        }
+        //        //state:1(0Готов  1Печать 2Необходим файл);z:0 
+        //        switch (state)
+        //        {
+        //            case "0":
+        //                stateTempl.CurrentState = $" current z={z}";
+        //                stateTempl.color = Color.Green;
+        //                stateTempl.CurrentState = "Ready to print";
+        //                //lastState = state;
+        //                form.CurState = stateTempl;
 
-                        break;
-                    case "1":
-                        stateTempl.color = Color.Green;
-                        lastState = state;
-                        stateTempl.CurrentState = $" current z={z}";
-                        form.CurState = stateTempl;
-                        SendNextFile = false;
-                        break;
-                }
-            }
+        //                break;
+        //            case "1":
+        //                stateTempl.color = Color.Green;
+        //                lastState = state;
+        //                stateTempl.CurrentState = $" current z={z}";
+        //                form.CurState = stateTempl;
+        //                SendNextFile = false;
+        //                break;
+        //        }
+        //    }
 
-            //form.UpdateRobotTable();
-        }
+        //    //form.UpdateRobotTable();
+        //}
         private void FTPLoad(string fileName, string pathWay)
         {
-            WebClient client = new WebClient();
-            client.Credentials = new NetworkCredential("pi", "8");
-            client.UploadFile(
-                $"ftp://{Addres}/files/{fileName}", $"{pathWay}");
+            //WebClient client = new WebClient();
+            //client.Credentials = new NetworkCredential("pi", "8");
+            //client.UploadFile(
+            //    $"ftp://{Addres}/files/{fileName}", $"{pathWay}");
 
         }
 

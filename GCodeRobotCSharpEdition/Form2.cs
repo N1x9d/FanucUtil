@@ -39,7 +39,21 @@ namespace GCodeRobotCSharpEdition
         }
         public RobotTamplate robot;
         private System.Windows.Forms.Timer myTimer;
+        public Form2( RobotTamplate rtmpl)
+        {
+            InitializeComponent();
+            CurState = new StateTempl("Ready to print", Color.Green);
+            robot = rtmpl;
 
+            
+            myTimer = new System.Windows.Forms.Timer();
+            myTimer.Tick += new EventHandler(TimerEventProcessor);
+
+            // Sets the timer interval to .1 seconds.
+            myTimer.Interval = 100;
+            myTimer.Start();
+
+        }
         private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
         {
             RobotState.Text = CurState.CurrentState;
@@ -94,21 +108,7 @@ namespace GCodeRobotCSharpEdition
 
         }
 
-        public Form2(string ip, RobotTamplate rtmpl)
-        {
-            InitializeComponent();
-            CurState= new StateTempl("Ready to print", Color.Green); 
-            robot = rtmpl;
-          
-            this.Text = ip;
-            myTimer = new System.Windows.Forms.Timer();
-            myTimer.Tick += new EventHandler(TimerEventProcessor);
-
-            // Sets the timer interval to .1 seconds.
-            myTimer.Interval = 100;
-            myTimer.Start();
-
-        }
+      
 
 
 
@@ -369,6 +369,11 @@ namespace GCodeRobotCSharpEdition
         private void Form2_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void rIP_TextChanged(object sender, EventArgs e)
+        {
+            robot.rIP = rIP.ToString();
         }
     }
 }

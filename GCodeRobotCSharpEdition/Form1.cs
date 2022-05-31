@@ -331,7 +331,7 @@ namespace GCodeRobotCSharpEdition
             {
                 NewRobot.Text.Replace(',', '.');
                 RobotTamplate r = new RobotTamplate(NewRobot.Text);
-                Form2 form = new Form2(r.Addres, r);
+                Form2 form = new Form2(r);
                 r.form = form;
                 robotsList.Add(new robotVisualize(r, form));
                 form.Show();
@@ -389,7 +389,7 @@ namespace GCodeRobotCSharpEdition
             {
                 NewRobot.Text.Replace(',', '.');
                 RobotTamplate r = new RobotTamplate(NewRobot.Text);
-                Form2 form = new Form2(r.Addres, r);
+                Form2 form = new Form2( r);
                 r.form = form;
                 robotsList.Add(new robotVisualize(r, form));
             }
@@ -444,10 +444,14 @@ namespace GCodeRobotCSharpEdition
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (var process in prList)
-            {
-                process.Kill();
-            }
+            //foreach (var process in prList)
+            //{
+            //    process.Kill();
+            //}
+            //foreach (Process proc in Process.GetProcessesByName("cmd"))
+            //{
+            //    //proc.Kill(true);
+            //}
         }
     }
 }
