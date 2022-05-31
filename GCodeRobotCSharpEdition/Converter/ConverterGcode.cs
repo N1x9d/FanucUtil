@@ -577,38 +577,38 @@ namespace GCodeRobotCSharpEdition
             {
                 string line = sr.ReadLine();
 
-                if (line.Contains("; layer "))
-                {
-                    if (_form.toolList.Count > 0)
-                    {
-                        var a = line.Split(' ');
-                        try
-                        {
-                            int layerind = int.Parse(a[2].Substring(0, a[2].Length - 1));
-                            foreach( var tool in _form.toolList)
-                            {
-                                if (tool.Layer % layerind == 0)
-                                {
-                                    var lsCode = tool.DuplicateLayerForThisTool(LayerPoints,_form,_pointcount);
-                                    LayerPoints.Clear();
-                                    _pointcount = lsCode.pointcount;
-                                    footer.AddRange(lsCode.footer);
-                                    header.AddRange(lsCode.header);
-                                }
-                               }
-                        }
-                        catch (Exception)
-                        {
+                //if (line.Contains("; layer "))
+                //{
+                //    if (_form.toolList.Count > 0)
+                //    {
+                //        var a = line.Split(' ');
+                //        try
+                //        {
+                //            int layerind = int.Parse(a[2].Substring(0, a[2].Length - 1));
+                //            foreach( var tool in _form.toolList)
+                //            {
+                //                if (tool.Layer % layerind == 0)
+                //                {
+                //                    var lsCode = tool.DuplicateLayerForThisTool(LayerPoints,_form,_pointcount);
+                //                    LayerPoints.Clear();
+                //                    _pointcount = lsCode.pointcount;
+                //                    footer.AddRange(lsCode.footer);
+                //                    header.AddRange(lsCode.header);
+                //                }
+                //               }
+                //        }
+                //        catch (Exception)
+                //        {
                            
-                        }
+                //        }
                         
-                    }
-                    if (_form.CheckLayer)
-                    {
-                        robot_flush_to_file();
-                        _pointcount = 0;
-                    }
-                }
+                //    }
+                //    if (_form.CheckLayer)
+                //    {
+                //        robot_flush_to_file();
+                //        _pointcount = 0;
+                //    }
+                //}
 
 
                 gcode_process(line);

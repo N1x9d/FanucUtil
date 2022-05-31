@@ -17,10 +17,9 @@ namespace GCodeRobotCSharpEdition
     public partial class Form1 : Form
     {
         private ConverterGcode conv;
-        private ConverterPM convPM;
-        public List<Tool> toolList { get; set; } = new List<Tool>();
-        public static Setting sets;
 
+        public static Setting sets;
+        public static List<Process> prList = new List<Process>();
 
         public string W
         {
@@ -178,8 +177,7 @@ namespace GCodeRobotCSharpEdition
         public Form1()
         {
             InitializeComponent();
-            conv = new ConverterGcode(this);
-            convPM = new ConverterPM(this);
+            conv = new ConverterGcode(this);            
             sets = new Setting();
             ProcessStartInfo psipy = new ProcessStartInfo();
             psipy.CreateNoWindow = false;
@@ -187,6 +185,7 @@ namespace GCodeRobotCSharpEdition
             string cmdString = @$"/k ""python Scrypts\convert_2_tp_zmq.py """;
 
             Process Slice = new Process();
+            prList.Add(Slice);
             psipy.FileName = "cmd";
             psipy.Arguments = cmdString;
             Slice.StartInfo = psipy;
@@ -218,11 +217,8 @@ namespace GCodeRobotCSharpEdition
         private void button3_Click(object sender, EventArgs e)
         {
             
-            if (!checkBox2.Checked)
                 conv.on_btn_Process_clicked();
-            else
-                convPM.on_btn_Process_clicked();
-            checkBox2.Enabled = true ;
+            
         }
 
         private void check_startStop_Distance_CheckedChanged(object sender, EventArgs e)
@@ -246,12 +242,10 @@ namespace GCodeRobotCSharpEdition
 
         private void OpenFile_Click_1(object sender, EventArgs e)
         {
-            if(!checkBox2.Checked)
+           
                 conv.on_btn_Open_clicked();
-            else
-                convPM.on_btn_Open_clicked();
-            if(InputFile.Text!="")
-                checkBox2.Enabled = false;
+          
+           
         }
         private bool _RO;
         private bool _wave;
@@ -281,13 +275,7 @@ namespace GCodeRobotCSharpEdition
             else
                 GetRO = false;
         }
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked)
-                label1.Text = "PowerMill file name:";
-            else
-                label1.Text = "GCode file name:";
-        }
+       
 
         private void check_startStop_Distance_CheckedChanged_1(object sender, EventArgs e)
         {
@@ -298,254 +286,6 @@ namespace GCodeRobotCSharpEdition
         }
 
 
-
-
-//TOOL TAB IN WORKING (FREEZ)
-        private void Hummer_CheckedChanged(object sender, EventArgs e)
-        {
-            if( Hammer.Checked)
-            {
-                var a = toolList.Where(c => c.ToolType == "Hammer").ToList();
-                if (a.Count == 0)
-                    toolList.Add(new Tool("Hammer"));
-                else
-                    a[0].enable = true;
-                HammerLayer.Enabled = true;
-                HammerX.Enabled = true;
-                HammerY.Enabled = true;
-                HammerZ.Enabled = true;
-                HammerSpeed.Enabled = true;
-            }
-            else
-            {
-                var a = toolList.Where(c => c.ToolType == "Hammer").ToList();
-                a[0].enable = false;
-                HammerLayer.Enabled = false;
-                HammerX.Enabled = false;
-                HammerY.Enabled = false;
-                HammerZ.Enabled = false;
-                HammerSpeed.Enabled = false;
-            }
-        }
-
-        private void Cutter_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Cutter.Checked)
-            {
-                var a = toolList.Where(c => c.ToolType == "Cutter").ToList();
-                if (a.Count == 0)
-                    toolList.Add(new Tool("Cutter"));
-                else
-                    a[0].enable = true;
-                CutterLayer.Enabled = true;
-                CutterX.Enabled = true;
-                CutterY.Enabled = true;
-                CutterZ.Enabled = true;
-                CutterSpeed.Enabled = true;
-            }
-            else
-            {
-                var a = toolList.Where(c => c.ToolType == "Cutter").ToList();
-                a[0].enable = false;
-                CutterLayer.Enabled = false;
-                CutterX.Enabled = false;
-                CutterY.Enabled = false;
-                CutterZ.Enabled = false;
-                CutterSpeed.Enabled = false;
-            }
-        }
-       
-        private void Laser_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Laser.Checked)
-            {
-                var a = toolList.Where(c => c.ToolType == "Laser").ToList();
-                if (a.Count == 0)
-                    toolList.Add(new Tool("Laser"));
-                else
-                    a[0].enable = true;
-                LaserLayer.Enabled = true;
-                LaserX.Enabled = true;
-                LaserY.Enabled = true;
-                LaserZ.Enabled = true;
-                LaserSpeed.Enabled = true;
-            }
-            else
-            {
-                var a = toolList.Where(c => c.ToolType == "Laser").ToList();
-                a[0].enable = false;
-                LaserLayer.Enabled = false;
-                LaserX.Enabled = false;
-                LaserY.Enabled = false;
-                LaserZ.Enabled = false;
-                LaserSpeed.Enabled = false;
-            }
-        }
-
-        private void Pyrometer_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Pyrometer.Checked)
-            {
-                var a = toolList.Where(c => c.ToolType == "Pyrometer").ToList();
-                if (a.Count == 0)
-                    toolList.Add(new Tool("Pyrometer"));
-                else
-                    a[0].enable = true;
-                PyrometerLayer.Enabled = true;
-                PyrometerX.Enabled = true;
-                PyrometerY.Enabled = true;
-                PyrometerZ.Enabled = true;
-                PyrometerSpeed.Enabled = true;
-            }
-            else
-            {
-                var a = toolList.Where(c => c.ToolType == "Pyrometer").ToList();
-                a[0].enable = false;
-                PyrometerLayer.Enabled = false;
-                PyrometerX.Enabled = false;
-                PyrometerY.Enabled = false;
-                PyrometerZ.Enabled = false;
-                PyrometerSpeed.Enabled = false;
-            }
-        }
-      
-       
-        private void Surfacing_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Surfacing.Checked)
-            {
-                var a = toolList.Where(c => c.ToolType == "Surfacing").ToList();
-                if (a.Count == 0)
-                    toolList.Add(new Tool("Surfacing"));
-                else
-                    a[0].enable = true;
-                SurfacingLayer.Enabled = true;
-                SurfacingX.Enabled = true;
-                SurfacingY.Enabled = true;
-                SurfacingZ.Enabled = true;
-                SurfacingSpeed.Enabled = true;
-            }
-            else
-            {
-                var a = toolList.Where(c => c.ToolType == "Surfacing").ToList();
-                a[0].enable = false;
-                SurfacingLayer.Enabled = false;
-                SurfacingX.Enabled = false;
-                SurfacingY.Enabled = false;
-                SurfacingZ.Enabled = false;
-                SurfacingSpeed.Enabled = false;
-            }
-        }
-        private void ForAllLyaer(string value)
-        {
-            HammerLayer.Text = value;
-            CutterLayer.Text = value;
-            LaserLayer.Text = value;
-            PyrometerLayer.Text = value;
-            SurfacingLayer.Text = value;
-
-        }
-        private void SetX (string tool, float val)
-        {
-            var a = toolList.Where(c => c.ToolType == tool).ToList();
-            a[0].Offcet.X = val;
-        }
-        private void SetY(string tool, float val)
-        {
-            var a = toolList.Where(c => c.ToolType == tool).ToList();
-            a[0].Offcet.Y = val;
-        }
-        private void SetZ(string tool, float val)
-        {
-            var a = toolList.Where(c => c.ToolType == tool).ToList();
-            a[0].Offcet.Z = val;
-        }
-        private void SetSpeed(string tool, float val)
-        {
-            var a = toolList.Where(c => c.ToolType == tool).ToList();
-            a[0].Speed = val;
-        }
-        private void SetLayer(string tool, int val)
-        {
-            var a = toolList.Where(c => c.ToolType == tool).ToList();
-            a[0].Layer = val;
-        }
-        private void apply_Click(object sender, EventArgs e)
-        {
-            if (Hammer.Checked)
-            {
-                SetX("Hammer", float.Parse(HammerX.Text));
-                SetY("Hammer", float.Parse(HammerY.Text));
-                SetZ("Hammer", float.Parse(HammerZ.Text));
-                SetSpeed("Hammer", float.Parse(HammerSpeed.Text));
-                SetLayer("Hammer", int.Parse(HammerLayer.Text));
-            }
-            if (Cutter.Checked)
-            {
-                SetX("Cutter", float.Parse(CutterX.Text));
-                SetY("Cutter", float.Parse(CutterY.Text));
-                SetZ("Cutter", float.Parse(CutterZ.Text));
-                SetSpeed("Cutter", float.Parse(CutterSpeed.Text));
-                SetLayer("Cutter", int.Parse(CutterLayer.Text));
-            }
-            if (Laser.Checked)
-            {
-                SetX("Laser", float.Parse(LaserX.Text));
-                SetY("Laser", float.Parse(LaserY.Text));
-                SetZ("Laser", float.Parse(LaserZ.Text));
-                SetSpeed("Laser", float.Parse(LaserSpeed.Text));
-                SetLayer("Laser", int.Parse(LaserLayer.Text));
-            }
-            if (Pyrometer.Checked)
-            {
-                SetX("Pyrometer", float.Parse(PyrometerX.Text));
-                SetY("Pyrometer", float.Parse(PyrometerY.Text));
-                SetZ("Pyrometer", float.Parse(PyrometerZ.Text));
-                SetSpeed("Pyrometer", float.Parse(PyrometerSpeed.Text));
-                SetLayer("Pyrometer", int.Parse(PyrometerLayer.Text));
-            }
-            if (Surfacing.Checked)
-            {
-                SetX("Surfacing", float.Parse(SurfacingX.Text));
-                SetY("Surfacing", float.Parse(SurfacingY.Text));
-                SetZ("Surfacing", float.Parse(SurfacingZ.Text));
-                SetSpeed("Surfacing", float.Parse(SurfacingSpeed.Text));
-                SetLayer("Surfacing", int.Parse(SurfacingLayer.Text));
-            }
-            
-           
-            
-        }
-
-        private void HummerLayer_TextChanged(object sender, EventArgs e)
-        {
-            if(checkBox1.Checked)
-                ForAllLyaer(HammerLayer.Text);
-        }
-
-        private void CutterLayer_TextChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-                ForAllLyaer(CutterLayer.Text);
-        }
-
-        private void LaserLayer_TextChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-                ForAllLyaer(LaserLayer.Text);
-        }
-
-        private void PyrometerLayer_TextChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-                ForAllLyaer(PyrometerLayer.Text);
-        }
-
-        private void SurfacingLayer_TextChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-                ForAllLyaer(SurfacingLayer.Text);
-        }
 
         private void SendTp_CheckedChanged(object sender, EventArgs e)
         {
@@ -566,21 +306,7 @@ namespace GCodeRobotCSharpEdition
 
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+       
         
 
         private void проверитьОбновленияToolStripMenuItem_Click(object sender, EventArgs e)
@@ -602,8 +328,13 @@ namespace GCodeRobotCSharpEdition
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex == 1)
-            {   
-                Blank();
+            {
+                NewRobot.Text.Replace(',', '.');
+                RobotTamplate r = new RobotTamplate(NewRobot.Text);
+                Form2 form = new Form2(r.Addres, r);
+                r.form = form;
+                robotsList.Add(new robotVisualize(r, form));
+                form.Show();
                 tabControl1.SelectedIndex = 0;
 
             }
@@ -683,14 +414,7 @@ namespace GCodeRobotCSharpEdition
                 //Read the contents of the file into a stream
                 if (!System.IO.File.Exists(fileDir + "\\robot.ini"))
                 {
-                    StreamWriter file = new StreamWriter(fileDir + "\\robot.ini");
-                    file.WriteLine("[WinOLPC_Util]");
-                    file.WriteLine("Robot=\\C\\Users\\02Robot\\Documents\\My Workcells\\Fanuc_002\\Robot_1");
-                    file.WriteLine("Version=V7.70-1");
-                    file.WriteLine(@"Path=C:\Program Files (x86)\FANUC\WinOLPC\Versions\V770-1\bin");
-                    file.WriteLine(@"Support=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\support");
-                    file.WriteLine(@"Output=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\output");
-                    file.Close();
+                    File.Copy(@"res\robot.ini", fileDir, true);
                 }
                 var startInfo = new ProcessStartInfo()
                 {
@@ -715,6 +439,14 @@ namespace GCodeRobotCSharpEdition
                 edit_Split.ReadOnly = false;
                 Laser_pass.Enabled = false;
 
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (var process in prList)
+            {
+                process.Kill();
             }
         }
     }

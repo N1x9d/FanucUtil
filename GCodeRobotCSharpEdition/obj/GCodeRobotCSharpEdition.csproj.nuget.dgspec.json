@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\NewRepo\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {}
+    "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {}
   },
   "projects": {
-    "E:\\NewRepo\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {
+    "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\NewRepo\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
+        "projectUniqueName": "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
         "projectName": "GCodeRobotCSharpEdition",
-        "projectPath": "E:\\NewRepo\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
+        "projectPath": "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
         "packagesPath": "C:\\Users\\N1x9d\\.nuget\\packages\\",
-        "outputPath": "E:\\NewRepo\\GCodeRobotCSharpEdition\\obj\\",
+        "outputPath": "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

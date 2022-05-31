@@ -12,9 +12,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b3e6d9cf1bc341398187963e7cd5a825c66390/7c/beddad4c/NativeWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8076d5a56e85b3c9a3987b5d28294c45d1c58ec9a503086b1d2442626d73a/Control.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b3e6d9cf1bc341398187963e7cd5a825c66390/1c/03c0bdd0/Control.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4789d9cf9e7d3d7376f4a034f613f51f317bd8b8ee198acffdde96892185/ComboBox.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85439f6eae98fa347ee1d64e1d66ef769eaa9e98ad0a848cca2f75fdead69/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52bc2cf76c8edd8fbf2f6123a5a6732293714dff556be412b6ea83ebf654c8/Number.Parsing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3156fcea463598311f1185e88157f94a2d9121d89d571ade73571263299/NativeWindow.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -59,6 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1652418203088</updated>
       <workItem from="1652418244219" duration="5915000" />
+      <workItem from="1653019732325" duration="4982000" />
     </task>
     <servers />
   </component>
@@ -66,7 +70,7 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
@@ -76,16 +80,29 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/GCodeRobotCSharpEdition/Tamplates/Robot/RobotTamplate.cs</url>
-          <line>33</line>
-          <properties documentPath="E:\NewRepo\GCodeRobotCSharpEdition\Tamplates\Robot\RobotTamplate.cs" initialLine="33" containingFunctionPresentation="property 'SendNextFile'">
+          <line>120</line>
+          <properties documentPath="E:\NewRepo\GCodeRobotCSharpEdition\Tamplates\Robot\RobotTamplate.cs" initialLine="120" containingFunctionPresentation="method 'PrintAsync'">
             <startOffsets>
-              <option value="779" />
+              <option value="3586" />
             </startOffsets>
             <endOffsets>
-              <option value="780" />
+              <option value="3661" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="10" />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/GCodeRobotCSharpEdition/Tamplates/Robot/RobotTamplate.cs</url>
+          <line>368</line>
+          <properties documentPath="E:\NewRepo\GCodeRobotCSharpEdition\Tamplates\Robot\RobotTamplate.cs" initialLine="368" containingFunctionPresentation="method 'ChechConnection'">
+            <startOffsets>
+              <option value="13983" />
+            </startOffsets>
+            <endOffsets>
+              <option value="14012" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

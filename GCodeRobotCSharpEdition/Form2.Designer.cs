@@ -40,7 +40,6 @@ namespace GCodeRobotCSharpEdition
             this.Next = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.Prev = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.TpAll = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -152,15 +151,6 @@ namespace GCodeRobotCSharpEdition
             this.Prev.UseVisualStyleBackColor = true;
             this.Prev.Click += new System.EventHandler(this.Prev_Click);
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(354, 17);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(274, 222);
-            this.textBox2.TabIndex = 16;
-            // 
             // TpAll
             // 
             this.TpAll.AutoSize = true;
@@ -175,9 +165,8 @@ namespace GCodeRobotCSharpEdition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 248);
+            this.ClientSize = new System.Drawing.Size(367, 248);
             this.Controls.Add(this.TpAll);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.Prev);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.Next);
@@ -210,7 +199,6 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.Button Next;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button Prev;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.CheckBox TpAll;
     }
 }

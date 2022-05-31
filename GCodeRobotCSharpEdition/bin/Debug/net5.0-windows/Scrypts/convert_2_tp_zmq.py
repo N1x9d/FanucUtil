@@ -10,6 +10,25 @@ data = dict()
 states = dict()
 states['state'] = 0
 
+def sort(names):
+  """Функция сортировки имен файлов в папке.
+     - На вход подаются массив имен файлов.
+     - На выходе возвращается отсортированный массив имен файлов."""
+  for i in range(len(names) - 1):
+    for j in range(len(names) - 1 - i):
+      name1, name2 = names[j].split('_'), names[j + 1].split('_')
+      #print(name1, name2)
+      try:
+        if len(name1) == 1:
+          continue
+        elif len(name2) == 1 and j >= 0:
+          names[j], names[j + 1] = names[j + 1], names[j]        
+        elif int(name1[-1].split('.')[0]) > int(name2[-1].split('.')[0]):
+          names[j], names[j + 1] = names[j + 1], names[j]
+      except:
+        names[j], names[j + 1] = names[j + 1], names[j]
+    
+  return names
 
 def make_ini(path):
   f = open('{}/robot.ini'.format(path), 'w')
@@ -21,47 +40,6 @@ Support=C:\\Users\\02Robot\\Documents\\My Workcells\\Fanuc_002\\Robot_1\\support
 Output=C:\\Users\\02Robot\\Documents\\My Workcells\\Fanuc_002\\Robot_1\\output''')
   f.close()
 
-
-def convert_ls_to_tp(path, output_folder):
-    make_ini(path)
-    files = os.listdir(path)
-    for file in files:
-        if file.split('.')[-1] == 'ls':
-            os.system('cmd /c "cd {} & maketp {}"'.format(path, file))
-
-            filename_path = '{}/{}'.format(path, file.replace('.ls', '.tp'))
-            output_file_path = '{}/{}'.format(output_folder, file.replace('.ls', '.tp'))
-            os.replace(filename_path, output_file_path)
-
-
-##try:
-##  path = []
-##  if len(sys.argv) > 1:
-##    path = sys.argv[1].replace('\\', '/')
-##  else:
-##    path ='out_test_2'
-##
-##  if os.path.isdir(path):
-##    if len(sys.argv) > 2:
-##      output_folder = sys.argv[2].replace('\\', '/')
-##    else:
-##      output_folder = path.split('/')
-##      first = '/'.join(output_folder[:-1])
-##      last = '{}_TP'.format(output_folder[-1])
-##      output_folder  = '/'.join([first, last])
-##
-##    if not os.path.isdir(output_folder):
-##      os.mkdir(output_folder)
-##
-##    convert_ls_to_tp(path, output_folder)
-##
-##  else:
-##    convert_ls_to_tp_single(path)
-##
-##  print('1\nsucces')
-##
-##except Exception as e:
-##  print('{}\n{}'.format(0, e))
 
 def main():
     global data, states, lock
@@ -89,6 +67,8 @@ def main():
                 for file in os.listdir(path):
                     if file.split('.')[-1] == 'ls':
                         files.append(file)
+
+                files = sort(files)
 
                 disk = path[:2]
                 path = path[2:]

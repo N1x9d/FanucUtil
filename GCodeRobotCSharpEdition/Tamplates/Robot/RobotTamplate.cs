@@ -118,7 +118,8 @@ namespace GCodeRobotCSharpEdition.Robot
                         }
 
                         SendNextFile = false;
-                        var userResult = AutoClosingMessageBox.Show("Все хорошо? Продолжаем?", "Caption", int.Parse(Form1.sets.GetParamByName("NextLayerDelay").ParamValue), MessageBoxButtons.YesNo);
+                        var ad = int.Parse(Form1.sets.GetParamByName("NextLayerDelay").ParamValue);
+                        var userResult = AutoClosingMessageBox.Show("Все хорошо? Продолжаем? Да- отправка файла нет остановка печати, по истечении таймера файл отправится сам", "Caption",ad*1000 , MessageBoxButtons.YesNo);
                         if (userResult == System.Windows.Forms.DialogResult.Yes)
                         {
 
@@ -368,6 +369,7 @@ namespace GCodeRobotCSharpEdition.Robot
                         stateTempl.color = Color.Red;
                         stateTempl.CurrentState = "Connection error";
                         LogList.Add(3, "Connection error");
+                        ///переделать передачу
                         form.CurState = stateTempl;
                         break;
                 }

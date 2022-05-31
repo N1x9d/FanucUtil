@@ -46,8 +46,6 @@ namespace GCodeRobotCSharpEdition
             RobotState.ForeColor = CurState.color;
             //robot.ChechConnection();
             var a = LogList.Print();
-            textBox2.Text = "";
-            textBox2.AppendText(a);
             RobotState.Text = _curState.CurrentState.ToString();
             RobotState.ForeColor = _curState.color;
 
@@ -89,7 +87,8 @@ namespace GCodeRobotCSharpEdition
                     client.Connect($"tcp://localhost:5001");
                     client.SendFrame($"states");
                     var msg2 = client.ReceiveFrameString();
-                    LogList.Add(3, msg2);
+                   _curState.CurrentState = msg2;
+                    _curState.color = Color.Black;
                 }
             }
 
@@ -100,12 +99,12 @@ namespace GCodeRobotCSharpEdition
             InitializeComponent();
             CurState= new StateTempl("Ready to print", Color.Green); 
             robot = rtmpl;
-            textBox2.Text = "aaa";   
+          
             this.Text = ip;
             myTimer = new System.Windows.Forms.Timer();
             myTimer.Tick += new EventHandler(TimerEventProcessor);
 
-            // Sets the timer interval to 5 seconds.
+            // Sets the timer interval to .1 seconds.
             myTimer.Interval = 100;
             myTimer.Start();
 
@@ -233,14 +232,7 @@ namespace GCodeRobotCSharpEdition
                     //Read the contents of the file into a stream
                     if (!System.IO.File.Exists(fileDir + "\\robot.ini"))
                     {
-                        StreamWriter file = new StreamWriter(fileDir + "\\robot.ini");
-                        file.WriteLine("[WinOLPC_Util]");
-                        file.WriteLine("Robot=\\C\\Users\\02Robot\\Documents\\My Workcells\\Fanuc_002\\Robot_1");
-                        file.WriteLine("Version=V7.70-1");
-                        file.WriteLine(@"Path=C:\Program Files (x86)\FANUC\WinOLPC\Versions\V770-1\bin");
-                        file.WriteLine(@"Support=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\support");
-                        file.WriteLine(@"Output=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\output");
-                        file.Close();
+                        File.Copy(@"res\robot.ini", fileDir, true);
                     }
                     var startInfo = new ProcessStartInfo()
                     {
@@ -255,12 +247,12 @@ namespace GCodeRobotCSharpEdition
             else
             {
                 using (var client = new RequestSocket())
-                {
+                {_isTranslating=true;
                     client.Connect($"tcp://localhost:5001");
                     client.SendFrame($"path${PrPatch}");
                     var msg = client.ReceiveFrameString();
-                    if(msg != "1")
-                        _isTranslating=true;
+                    //if(msg != "1")
+                        
                 }
             }
 
@@ -339,7 +331,7 @@ namespace GCodeRobotCSharpEdition
             Collection.Enabled = true;
             textBox1.Text = "";
             Print.Enabled = true;
-            textBox2.Text = "";
+            
             //StartPrint.Enabled = true;
             StartPrint.Text = $"Следующий файл";
             //robot.ChechTest();
