@@ -24,8 +24,9 @@ namespace GCodeRobotCSharpEdition
         public string Rad;
         public string Speed;
         public string Time;
+        public string UDP;
 
-        public LSLineInfo(string power, string arcX, string arcY, string arcZ, string startX, string startY, string startZ, string endX, string endY, string endz, string rad, string speed, string time)
+        public LSLineInfo(string power, string arcX, string arcY, string arcZ, string startX, string startY, string startZ, string endX, string endY, string endz, string rad, string speed, string time, string udp="")
         {
             try
             {
@@ -42,6 +43,7 @@ namespace GCodeRobotCSharpEdition
                 Rad = rad;
                 Speed = speed+0;
                 Time = time;
+                UDP = udp;
             }
             catch(Exception e)
             {
@@ -59,6 +61,7 @@ namespace GCodeRobotCSharpEdition
                 Rad = rad;
                 Speed = speed;
                 Time = time;
+                UDP = udp;
             }
         }
         private float CalkDist(LSLineInfo line)
@@ -91,7 +94,7 @@ namespace GCodeRobotCSharpEdition
     }
     class ConverterPM
     {
-            private LSLineInfo lineLSR;
+            private LSLineInfo lineLSR,prevLine;
             private Form1 _form;
             private coordinates _current, _previous;
             private gcode_variable _gcode;
@@ -263,6 +266,12 @@ namespace GCodeRobotCSharpEdition
                     _arcenabled = 0;
                         PrevEnd = true;
                     }
+                }
+                if (lineLSR.UDP != "" && lineLSR.UDP != prevLine.UDP)
+                {
+                    var udpVal=lineLSR.UDP.Substring(3);
+                    udpVal = udpVal.Replace(',', '.');
+                    header.Add($": Arc Start[{udpVal}];");
                 }
             float y = 180f + (getAngle(coord.r, coord.p));
             float x = (getAngle(coord.w, coord.r) + 90);
@@ -525,9 +534,13 @@ namespace GCodeRobotCSharpEdition
             {
             try
             {
+                prevLine = lineLSR;
                 string lin = line;
                 string[] a = lin.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                lineLSR = new LSLineInfo(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10], a[11], a[12]);
+                if(lin.Contains("UDP"))
+                    lineLSR = new LSLineInfo(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10], a[11], a[13], a[12]);
+                else
+                    lineLSR = new LSLineInfo(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10], a[11], a[12]);
 
                 //if (_gcode.command == "M" && (_gcode.commandvalue == 800))
                 //{
