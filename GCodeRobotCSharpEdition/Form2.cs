@@ -217,7 +217,7 @@ namespace GCodeRobotCSharpEdition
         public Task task { get; set; }
         private void MakeTP_Click(object sender, EventArgs e)
         {
-            if (!TpAll.Checked)
+            if (TpAll.Checked)
             {
                 var fileContent = string.Empty;
                 OpenFileDialog FBD = new OpenFileDialog();

@@ -641,7 +641,7 @@ namespace GCodeRobotCSharpEdition
             {
 
                 var dirName = FBD.SelectedPath.Substring(FBD.SelectedPath.LastIndexOf("\\") + 1);
-                textBox1.Text = dirName;
+                
                
             }
             
