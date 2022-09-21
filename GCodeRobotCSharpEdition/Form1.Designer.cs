@@ -201,7 +201,7 @@ namespace GCodeRobotCSharpEdition
             this.groupBox4.Controls.Add(this.MakeTP);
             this.groupBox4.Controls.Add(this.textBox1);
             this.groupBox4.Controls.Add(this.Print);
-            this.groupBox4.Location = new System.Drawing.Point(456, 70);
+            this.groupBox4.Location = new System.Drawing.Point(19, 70);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -247,6 +247,7 @@ namespace GCodeRobotCSharpEdition
             this.label2.Size = new System.Drawing.Size(125, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Avable robots list";
+            this.label2.Visible = false;
             // 
             // button2
             // 
@@ -271,6 +272,7 @@ namespace GCodeRobotCSharpEdition
             this.SendTp.TabIndex = 4;
             this.SendTp.Text = "Send TP file";
             this.SendTp.UseVisualStyleBackColor = true;
+            this.SendTp.Visible = false;
             this.SendTp.CheckedChanged += new System.EventHandler(this.SendTp_CheckedChanged);
             // 
             // NewRobot
@@ -341,6 +343,7 @@ namespace GCodeRobotCSharpEdition
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(402, 384);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Visible = false;
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // ID

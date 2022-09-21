@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e9ggZApWR3OQRZF6ZiH2tMlCwdzJv+mYkS8yTVvnCjaG2pqFYCcUVXOHmJ1q9lYk/LF7i6elBzkeoBywHtNtEg==",
+  "dgSpecHash": "k72S/oSRxNO77yFvKf0xAdw0GIn08H/VODaEMSjQ7d0/n64yoaVX/T0VTuIE/yrO2PM2zMs+JCUssOZ2a5Ejug==",
   "success": true,
-  "projectFilePath": "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
+  "projectFilePath": "C:\\Users\\N1x9d\\source\\repos\\FanucUtil\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\N1x9d\\.nuget\\packages\\asyncio\\0.1.69\\asyncio.0.1.69.nupkg.sha512",
     "C:\\Users\\N1x9d\\.nuget\\packages\\autoclosingmessagebox\\1.0.0.2\\autoclosingmessagebox.1.0.0.2.nupkg.sha512",

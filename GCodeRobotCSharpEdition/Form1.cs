@@ -327,17 +327,17 @@ namespace GCodeRobotCSharpEdition
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex == 1)
-            {
-                NewRobot.Text.Replace(',', '.');
-                RobotTamplate r = new RobotTamplate(NewRobot.Text);
-                Form2 form = new Form2(r);
-                r.form = form;
-                robotsList.Add(new robotVisualize(r, form));
-                form.Show();
-                tabControl1.SelectedIndex = 0;
+            //if (tabControl1.SelectedIndex == 1)
+            //{
+            //    NewRobot.Text.Replace(',', '.');
+            //    RobotTamplate r = new RobotTamplate(NewRobot.Text);
+            //    Form2 form = new Form2(r);
+            //    r.form = form;
+            //    robotsList.Add(new robotVisualize(r, form));
+            //    form.Show();
+            //    tabControl1.SelectedIndex = 0;
 
-            }
+            //}
                
         }
 
@@ -391,9 +391,8 @@ namespace GCodeRobotCSharpEdition
                 RobotTamplate r = new RobotTamplate(NewRobot.Text);
                 Form2 form = new Form2( r);
                 r.form = form;
-                robotsList.Add(new robotVisualize(r, form));
+                r.form.Show();
             }
-            UpdateRobotTable();
 
         }
 

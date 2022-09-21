@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\GCodeRobotCSharpEdition",
-    "\\GCodeRobotCSharpEdition\\Converter"
+    ""
   ],
-  "SelectedNode": "\\GCodeRobotCSharpEdition\\Converter\\ConverterPM.cs",
+  "SelectedNode": "\\GCodeRobotCSharpEdition.sln",
   "PreviewInSolutionExplorer": false
 }

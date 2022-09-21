@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {}
+    "C:\\Users\\N1x9d\\source\\repos\\FanucUtil\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {}
   },
   "projects": {
-    "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {
+    "C:\\Users\\N1x9d\\source\\repos\\FanucUtil\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
+        "projectUniqueName": "C:\\Users\\N1x9d\\source\\repos\\FanucUtil\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
         "projectName": "GCodeRobotCSharpEdition",
-        "projectPath": "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
+        "projectPath": "C:\\Users\\N1x9d\\source\\repos\\FanucUtil\\GCodeRobotCSharpEdition\\GCodeRobotCSharpEdition.csproj",
         "packagesPath": "C:\\Users\\N1x9d\\.nuget\\packages\\",
-        "outputPath": "E:\\Gcode Tr PE\\GCodeRobotCSharpEdition\\obj\\",
+        "outputPath": "C:\\Users\\N1x9d\\source\\repos\\FanucUtil\\GCodeRobotCSharpEdition\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.ics.perm.ru/api/v2/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

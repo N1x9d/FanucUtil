@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GCodeRobotCSharpEdition</name>
+    </assembly>
+    <members>
+        <member name="F:GCodeRobotCSharpEdition.Form1.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Form1.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Form1.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Form2.button2_Click(System.Object,System.EventArgs)">
+            <summary>
+            next
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:GCodeRobotCSharpEdition.Form2.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Form2.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Form2.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Program.Main">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:GCodeRobotCSharpEdition.Properties.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:GCodeRobotCSharpEdition.Properties.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:GCodeRobotCSharpEdition.Properties.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="F:GCodeRobotCSharpEdition.Settings.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Settings.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Settings.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Robot.RobotTamplate.CheckNext">
+            <summary>
+            проверка необходимости отправки следующего файла работает пораллельно во время печати
+            </summary>
+        </member>
+        <member name="M:GCodeRobotCSharpEdition.Robot.RobotTamplate.ChechConnection">
+            <summary>
+            проверяет связь с сервером работает в основном потоке
+            </summary>
+        </member>
+    </members>
+</doc>
