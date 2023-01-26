@@ -22,7 +22,7 @@ namespace GCodeRobotCSharpEdition.Robot
 
     public struct ResaltTamplate
     {
-        public List<string> footer ;
+        public List<string> footer;
         public List<string> header;
         public int pointcount;
     }
@@ -71,35 +71,35 @@ namespace GCodeRobotCSharpEdition.Robot
             for (int i = 1; i < points.Count; i++)
             {
                 _current = points[i].coord;
-                if (_current.states.Contains("p")) termination = _form.Tn;
-                if (_current.states.Contains("P")) termination = _form.Tw;
+                //if (_current.states.Contains("p")) termination = _form.Tn;
+                //if (_current.states.Contains("P")) termination = _form.Tw;
 
                 //if (!_form.noArc)
                 //{
-                    if (_form.AutoArc)
-                    {
-                        if (_current.states.Contains("p") && _previous.states.Contains("P"))
-                        {
-                            header.Add(": Arc End[1];");
-                        }
+                //if (_form.AutoArc)
+                //{
+                //    if (_current.states.Contains("p") && _previous.states.Contains("P"))
+                //    {
+                //        header.Add(": Arc End[1];");
+                //    }
 
-                        if (_current.states.Contains("P") && _previous.states.Contains("p"))
-                        {
-                            header.Add(": Arc Start[1];");
-                        }
-                    }
+                //    if (_current.states.Contains("P") && _previous.states.Contains("p"))
+                //    {
+                //        header.Add(": Arc Start[1];");
+                //    }
+                //}
 
-                    //if (_arcenabled == 1)
-                    //{
-                    //    header.Add(": Arc Start[1];");
-                    //    _arcenabled = 0;
-                    //}
+                //if (_arcenabled == 1)
+                //{
+                //    header.Add(": Arc Start[1];");
+                //    _arcenabled = 0;
+                //}
 
-                    //if (_arcenabled == 2)
-                    //{
-                    //    header.Add(": Arc End[1];");
-                    //    _arcenabled = 0;
-                    //}
+                //if (_arcenabled == 2)
+                //{
+                //    header.Add(": Arc End[1];");
+                //    _arcenabled = 0;
+                //}
                 //}
 
 
@@ -113,16 +113,16 @@ namespace GCodeRobotCSharpEdition.Robot
                     value = _current.feedrate / 10 * (float)Convert.ToDouble(_form.Es);
                     int feed = (int)Math.Round(value);
 
-                    if (_form.WeldSpeed && (_current.states.Contains("A") || _current.states.Contains("P")))
-                    {
-                        line += "WELD_SPEED ";
-                    }
-                    else
-                    {
-                        line += feed;
-                        line += _form.unit;
-                        line += " ";
-                    }
+                    //if (_form.WeldSpeed && (_current.states.Contains("A") || _current.states.Contains("P")))
+                    //{
+                    //    line += "WELD_SPEED ";
+                    //}
+                    //else
+                    //{
+                    //    line += feed;
+                    //    line += _form.unit;
+                    //    line += " ";
+                    //}
 
                     line += termination;
                     line += " ";
@@ -163,13 +163,13 @@ namespace GCodeRobotCSharpEdition.Robot
                     //coord_rotate(positioner.j1, 0, positioner.j2);
 
 
-                    value = float.Parse(_form.X, CultureInfo.InvariantCulture.NumberFormat) + coord.x+Offcet.X;
+                    value = float.Parse(_form.X, CultureInfo.InvariantCulture.NumberFormat) + coord.x + Offcet.X;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line = "      X = " + Conv + " mm, ";
-                    value = float.Parse(_form.Y, CultureInfo.InvariantCulture.NumberFormat) + coord.y+ Offcet.Y;
+                    value = float.Parse(_form.Y, CultureInfo.InvariantCulture.NumberFormat) + coord.y + Offcet.Y;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line += "Y = " + Conv + " mm, ";
-                    value = float.Parse(_form.Z, CultureInfo.InvariantCulture.NumberFormat) + coord.z+ Offcet.Z;
+                    value = float.Parse(_form.Z, CultureInfo.InvariantCulture.NumberFormat) + coord.z + Offcet.Z;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line += "Z = " + Conv + " mm,";
                     footer.Add(line);

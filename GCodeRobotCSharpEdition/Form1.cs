@@ -17,7 +17,7 @@ namespace GCodeRobotCSharpEdition
     public partial class Form1 : Form
     {
         private ConverterGcode conv;
-        private ConverterPM convPM;
+        //private ConverterPM convPM;
         public List<Tool> toolList { get; set; } = new List<Tool>();
         public static Setting sets;
 
@@ -104,7 +104,7 @@ namespace GCodeRobotCSharpEdition
         {
             get { return edit_Split.Text; }
         }
-        public string outFile
+        public string OutFile
         {
             get { return edit_Outfile.Text; }
         }
@@ -179,7 +179,7 @@ namespace GCodeRobotCSharpEdition
         {
             InitializeComponent();
             conv = new ConverterGcode(this);
-            convPM = new ConverterPM(this);
+            //convPM = new ConverterPM(this);
             sets = new Setting();
             ProcessStartInfo psipy = new ProcessStartInfo();
             psipy.CreateNoWindow = false;
@@ -220,8 +220,8 @@ namespace GCodeRobotCSharpEdition
             
             if (!checkBox2.Checked)
                 conv.on_btn_Process_clicked();
-            else
-                convPM.on_btn_Process_clicked();
+            //else
+            //    convPM.on_btn_Process_clicked();
             checkBox2.Enabled = true ;
         }
 
@@ -248,8 +248,8 @@ namespace GCodeRobotCSharpEdition
         {
             if(!checkBox2.Checked)
                 conv.on_btn_Open_clicked();
-            else
-                convPM.on_btn_Open_clicked();
+            //else
+            //    convPM.on_btn_Open_clicked();
             if(InputFile.Text!="")
                 checkBox2.Enabled = false;
         }
@@ -716,6 +716,11 @@ namespace GCodeRobotCSharpEdition
                 Laser_pass.Enabled = false;
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

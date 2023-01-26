@@ -1,10 +1,12 @@
-﻿namespace GCodeRobotCSharpEdition
+﻿using GCodeRobotCSharpEdition.Misc;
+
+namespace GCodeRobotCSharpEdition
 {
     public struct coordinates
     {
         public float x, y, z, e, a, b, c;
         public int feedrate;
-        public string states;
+        public PrintStatesEnum states;
     }
     public struct point
     {
