@@ -17,14 +17,8 @@ namespace GCodeRobotCSharpEdition
         private Form1 _form;
         private coordinates _current, _previous;
         private gcode_variable _gcode;
-        private int _pointcount;
-        private List<string> header;
-        private List<string> footer;
-        private bool _closed;
-        private int _filepart;
         private bool _movement;
         private int _arcenabled;
-        private coords coord = new coords();
         private positioner_variable positioner;
 
         private Fanuc fanuc;
@@ -34,15 +28,13 @@ namespace GCodeRobotCSharpEdition
         public ConverterGcode(Form1 form)
         {
             this._form = form;
-            header = new List<string>();
-            footer = new List<string>();
             fanuc = new Fanuc(_form);
         }
 
-        
-
-        //загрузка файла
-        public void on_btn_Open_clicked()
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OpenFile()
         {
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "GCode (*.gcode *.gc *.nc) |*.gcode; *.gc' *.nc| Other files (*.*)|*.*";
@@ -53,7 +45,7 @@ namespace GCodeRobotCSharpEdition
         }
         
         //обработка gcode
-        void gcode_process(Group[] line)
+        void ProcessLine(Group[] line)
         {
             _gcode.command = line[0].Value;
             _gcode.commandvalue = int.Parse(line[1].Value);
@@ -165,7 +157,7 @@ namespace GCodeRobotCSharpEdition
             return Params;
         }
 
-        public void on_btn_Process_clicked()
+        public void Generate()
         {
             string inputFile = _form.Input;
 
@@ -182,7 +174,7 @@ namespace GCodeRobotCSharpEdition
                 var gr = match.Groups;
                 var grops = gr.Values.Where(c => c.Name != "0").ToArray();
                 gLines.Add(grops);
-                gcode_process(grops);
+                ProcessLine(grops);
             }
             fanuc.GenerateFanucFile(LayerPoints);
             

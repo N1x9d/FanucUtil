@@ -219,7 +219,7 @@ namespace GCodeRobotCSharpEdition
         {
             
             if (!checkBox2.Checked)
-                conv.on_btn_Process_clicked();
+                conv.Generate();
             //else
             //    convPM.on_btn_Process_clicked();
             checkBox2.Enabled = true ;
@@ -247,7 +247,7 @@ namespace GCodeRobotCSharpEdition
         private void OpenFile_Click_1(object sender, EventArgs e)
         {
             if(!checkBox2.Checked)
-                conv.on_btn_Open_clicked();
+                conv.OpenFile();
             //else
             //    convPM.on_btn_Open_clicked();
             if(InputFile.Text!="")

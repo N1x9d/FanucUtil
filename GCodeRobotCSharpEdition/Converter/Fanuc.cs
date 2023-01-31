@@ -1,4 +1,5 @@
 ﻿using GCodeRobotCSharpEdition.Converter;
+using GCodeRobotCSharpEdition.Converter.GCodeRobotCSharpEdition;
 using GCodeRobotCSharpEdition.Misc;
 using System;
 using System.Collections.Generic;
@@ -32,12 +33,13 @@ namespace GCodeRobotCSharpEdition.Converter
         private int _filepart;
         private bool _movement;
         private int _arcenabled;
-        private coords coord = new coords();
+        private Coords coord = new Coords();
         private positioner_variable positioner;
-        bool Prevstart = false;
+        bool PrevStart = false;
         bool PrevEnd = false;
-        coords prevP = new coords();
-        coords curP = new coords();
+        Coords prevP = new Coords();
+        Coords curP = new Coords();
+        float prevX, prevY = 0;
 
         private string conv;
 
@@ -56,6 +58,27 @@ namespace GCodeRobotCSharpEdition.Converter
 
         CultureInfo myCIintl = new CultureInfo("es-ES", true);
 
+        private float getAngle(float x, float y)
+        {
+            var a = Math.Atan2(y, x);
+            a = a * 180 / Math.PI;
+            return (float)(a);
+        }
+
+        private bool checkStartsStops(Coords p1, Coords p2)
+        {
+            if (_form.Chechs)
+            {
+                var dist = Math.Pow((p1.x - p2.x), 2);
+                dist += Math.Pow((p1.y - p2.y), 2);
+                dist += Math.Pow((p1.z - p2.z), 2);
+                dist = Math.Sqrt(dist);
+                if (dist <= float.Parse(_form.CheckDist, myCIintl))
+                    return true;
+            }
+
+            return false;
+        }
 
         public void GenerateFanucFile(List<point> points)
         {
@@ -109,7 +132,7 @@ namespace GCodeRobotCSharpEdition.Converter
                                 header.Add(": RO[1]=ON;");
                             if (_form.GetWave)
                                 header.Add($": Weave Sine[{_form.WaveIndex}];");
-                            Prevstart = true;
+                            PrevStart = true;
                         }
                     }
 
@@ -121,7 +144,7 @@ namespace GCodeRobotCSharpEdition.Converter
                         if (_form.GetWave)
                             header.Add(": Weave Sine[2];");
                         _arcenabled = 0;
-                        Prevstart = true;
+                        PrevStart = true;
                     }
 
                     if (_arcenabled == 2)
@@ -136,6 +159,34 @@ namespace GCodeRobotCSharpEdition.Converter
                         PrevEnd = true;
                     }
                 }
+                float y = 180f + (getAngle(coord.r, coord.p));
+                float x = (getAngle(coord.w, coord.r) + 90);
+                if (y > 180)
+                    y -= 360;
+                else if (y < -180)
+                    y += 360;
+                if (x > 180)
+                    x -= 360;
+                else if (x < -180)
+                    x += 360;
+                bool _isNeed = false;
+                if ((Math.Abs(prevY - y) > _form.DefDegree || Math.Abs(prevX - x) > _form.DefDegree) && _form.WieldShield)
+                {
+                    header.Add(": Arc start [2];");
+                    _isNeed = true;
+                }
+                else if (_isNeed && _form.WieldShield)
+                {
+                    header.Add(": Arc Start[1];");
+                    if (_form.GetWave)
+                        header.Add(": RO[1]=ON;");
+                    if (_form.GetWave)
+                        header.Add($": Weave Sine[{_form.WaveIndex}];");
+                    _arcenabled = 0;
+                    PrevStart = true;
+                }
+                _pointcount++;
+                
                 if (point.movment)
                 {
                     string line = _pointcount + ": L P[" + _pointcount + "] ";
@@ -177,7 +228,7 @@ namespace GCodeRobotCSharpEdition.Converter
                     coord.r = _current.c;
                     prevP = curP;
                     curP = coord;
-                    if (PrevEnd && Prevstart)
+                    if (PrevEnd && PrevStart)
                     {
                         var a = checkStartsStops(curP, prevP);
                         if (a)
@@ -188,7 +239,7 @@ namespace GCodeRobotCSharpEdition.Converter
                     }
 
                     PrevEnd = false;
-                    Prevstart = false;
+                    PrevStart = false;
                     tool_rotate();
 
                     coord_rotate(positioner.j1, 0, positioner.j2);
@@ -262,21 +313,6 @@ namespace GCodeRobotCSharpEdition.Converter
             psi.Arguments = @"/n, /select, " + file;
             PrFolder.StartInfo = psi;
             PrFolder.Start();
-        }
-
-        private bool checkStartsStops(coords p1, coords p2)
-        {
-            if (_form.Chechs)
-            {
-                var dist = Math.Pow((p1.x - p2.x), 2);
-                dist += Math.Pow((p1.y - p2.y), 2);
-                dist += Math.Pow((p1.z - p2.z), 2);
-                dist = Math.Sqrt(dist);
-                if (dist <= float.Parse(_form.CheckDist, myCIintl))
-                    return true;
-            }
-
-            return false;
         }
 
         // не работает
