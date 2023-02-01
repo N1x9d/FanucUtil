@@ -30,12 +30,17 @@ namespace GCodeRobotCSharpEdition
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.PUT = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.PUF = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
             this.Laser_pass = new System.Windows.Forms.CheckBox();
@@ -53,16 +58,10 @@ namespace GCodeRobotCSharpEdition
             this.check_Autoarc = new System.Windows.Forms.CheckBox();
             this.check_Weldspeed = new System.Windows.Forms.CheckBox();
             this.check_Noarc = new System.Windows.Forms.CheckBox();
-            this.edit_Name = new System.Windows.Forms.TextBox();
             this.edit_TN = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.edit_TW = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.edit_Config = new System.Windows.Forms.TextBox();
-            this.edit_Units = new System.Windows.Forms.ComboBox();
-            this.edit_Speed = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.edit_J1 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.edit_J4 = new System.Windows.Forms.TextBox();
@@ -76,11 +75,15 @@ namespace GCodeRobotCSharpEdition
             this.box_Wrist = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.edit_UT = new System.Windows.Forms.TextBox();
+            this.RUT = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.edit_UF = new System.Windows.Forms.TextBox();
+            this.RUF = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.J1Offset = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.J2Offset = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
             this.edit_P = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.edit_R = new System.Windows.Forms.TextBox();
@@ -94,9 +97,6 @@ namespace GCodeRobotCSharpEdition
             this.edit_W = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.edit_Outfile = new System.Windows.Forms.TextBox();
-            this.label46 = new System.Windows.Forms.Label();
             this.OpenFile = new System.Windows.Forms.Button();
             this.InputFile = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -174,6 +174,7 @@ namespace GCodeRobotCSharpEdition
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -205,12 +206,13 @@ namespace GCodeRobotCSharpEdition
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1119, 482);
+            this.tabControl1.Size = new System.Drawing.Size(1023, 482);
             this.tabControl1.TabIndex = 57;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.WaweInd);
             this.tabPage1.Controls.Add(this.Degree_def);
@@ -225,16 +227,10 @@ namespace GCodeRobotCSharpEdition
             this.tabPage1.Controls.Add(this.check_Autoarc);
             this.tabPage1.Controls.Add(this.check_Weldspeed);
             this.tabPage1.Controls.Add(this.check_Noarc);
-            this.tabPage1.Controls.Add(this.edit_Name);
             this.tabPage1.Controls.Add(this.edit_TN);
             this.tabPage1.Controls.Add(this.label19);
             this.tabPage1.Controls.Add(this.edit_TW);
             this.tabPage1.Controls.Add(this.label20);
-            this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.edit_Config);
-            this.tabPage1.Controls.Add(this.edit_Units);
-            this.tabPage1.Controls.Add(this.edit_Speed);
-            this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.edit_J1);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.edit_J4);
@@ -254,10 +250,57 @@ namespace GCodeRobotCSharpEdition
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1111, 454);
+            this.tabPage1.Size = new System.Drawing.Size(1015, 454);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Convert";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.PUT);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.PUF);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Location = new System.Drawing.Point(825, 124);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(127, 105);
+            this.groupBox4.TabIndex = 63;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Positioner Frame";
+            // 
+            // PUT
+            // 
+            this.PUT.Location = new System.Drawing.Point(38, 50);
+            this.PUT.Name = "PUT";
+            this.PUT.Size = new System.Drawing.Size(66, 23);
+            this.PUT.TabIndex = 25;
+            this.PUT.Text = "5";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(8, 50);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(24, 15);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "UT:";
+            // 
+            // PUF
+            // 
+            this.PUF.Location = new System.Drawing.Point(38, 17);
+            this.PUF.Name = "PUF";
+            this.PUF.Size = new System.Drawing.Size(66, 23);
+            this.PUF.TabIndex = 23;
+            this.PUF.Text = "6";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(8, 21);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(24, 15);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "UF:";
             // 
             // groupBox5
             // 
@@ -265,7 +308,7 @@ namespace GCodeRobotCSharpEdition
             this.groupBox5.Controls.Add(this.Laser_pass);
             this.groupBox5.Controls.Add(this.edit_Split);
             this.groupBox5.Controls.Add(this.check_Layers);
-            this.groupBox5.Location = new System.Drawing.Point(721, 289);
+            this.groupBox5.Location = new System.Drawing.Point(720, 263);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(200, 107);
             this.groupBox5.TabIndex = 103;
@@ -314,7 +357,7 @@ namespace GCodeRobotCSharpEdition
             // WaweInd
             // 
             this.WaweInd.Enabled = false;
-            this.WaweInd.Location = new System.Drawing.Point(606, 315);
+            this.WaweInd.Location = new System.Drawing.Point(605, 289);
             this.WaweInd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.WaweInd.Name = "WaweInd";
             this.WaweInd.Size = new System.Drawing.Size(35, 23);
@@ -324,7 +367,7 @@ namespace GCodeRobotCSharpEdition
             // Degree_def
             // 
             this.Degree_def.Enabled = false;
-            this.Degree_def.Location = new System.Drawing.Point(606, 290);
+            this.Degree_def.Location = new System.Drawing.Point(605, 264);
             this.Degree_def.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Degree_def.Name = "Degree_def";
             this.Degree_def.Size = new System.Drawing.Size(35, 23);
@@ -334,7 +377,7 @@ namespace GCodeRobotCSharpEdition
             // WeldSheild
             // 
             this.WeldSheild.AutoSize = true;
-            this.WeldSheild.Location = new System.Drawing.Point(501, 291);
+            this.WeldSheild.Location = new System.Drawing.Point(500, 265);
             this.WeldSheild.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.WeldSheild.Name = "WeldSheild";
             this.WeldSheild.Size = new System.Drawing.Size(88, 19);
@@ -346,7 +389,7 @@ namespace GCodeRobotCSharpEdition
             // Wave
             // 
             this.Wave.AutoSize = true;
-            this.Wave.Location = new System.Drawing.Point(501, 317);
+            this.Wave.Location = new System.Drawing.Point(500, 291);
             this.Wave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Wave.Name = "Wave";
             this.Wave.Size = new System.Drawing.Size(93, 19);
@@ -358,7 +401,7 @@ namespace GCodeRobotCSharpEdition
             // RO
             // 
             this.RO.AutoSize = true;
-            this.RO.Location = new System.Drawing.Point(501, 338);
+            this.RO.Location = new System.Drawing.Point(500, 314);
             this.RO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RO.Name = "RO";
             this.RO.Size = new System.Drawing.Size(80, 19);
@@ -372,7 +415,7 @@ namespace GCodeRobotCSharpEdition
             this.checkBox2.AutoSize = true;
             this.checkBox2.Enabled = false;
             this.checkBox2.ForeColor = System.Drawing.Color.Red;
-            this.checkBox2.Location = new System.Drawing.Point(59, 100);
+            this.checkBox2.Location = new System.Drawing.Point(56, 89);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(116, 19);
@@ -384,7 +427,7 @@ namespace GCodeRobotCSharpEdition
             // CheckDistance
             // 
             this.CheckDistance.Enabled = false;
-            this.CheckDistance.Location = new System.Drawing.Point(309, 289);
+            this.CheckDistance.Location = new System.Drawing.Point(308, 263);
             this.CheckDistance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CheckDistance.Name = "CheckDistance";
             this.CheckDistance.Size = new System.Drawing.Size(24, 23);
@@ -394,7 +437,7 @@ namespace GCodeRobotCSharpEdition
             // check_startStop_Distance
             // 
             this.check_startStop_Distance.AutoSize = true;
-            this.check_startStop_Distance.Location = new System.Drawing.Point(309, 316);
+            this.check_startStop_Distance.Location = new System.Drawing.Point(308, 290);
             this.check_startStop_Distance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.check_startStop_Distance.Name = "check_startStop_Distance";
             this.check_startStop_Distance.Size = new System.Drawing.Size(154, 19);
@@ -406,7 +449,7 @@ namespace GCodeRobotCSharpEdition
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(344, 292);
+            this.label21.Location = new System.Drawing.Point(343, 266);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(128, 15);
             this.label21.TabIndex = 89;
@@ -417,7 +460,7 @@ namespace GCodeRobotCSharpEdition
             this.check_Autoarc.AutoSize = true;
             this.check_Autoarc.Checked = true;
             this.check_Autoarc.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.check_Autoarc.Location = new System.Drawing.Point(82, 316);
+            this.check_Autoarc.Location = new System.Drawing.Point(81, 290);
             this.check_Autoarc.Name = "check_Autoarc";
             this.check_Autoarc.Size = new System.Drawing.Size(179, 19);
             this.check_Autoarc.TabIndex = 88;
@@ -427,7 +470,7 @@ namespace GCodeRobotCSharpEdition
             // check_Weldspeed
             // 
             this.check_Weldspeed.AutoSize = true;
-            this.check_Weldspeed.Location = new System.Drawing.Point(82, 341);
+            this.check_Weldspeed.Location = new System.Drawing.Point(81, 315);
             this.check_Weldspeed.Name = "check_Weldspeed";
             this.check_Weldspeed.Size = new System.Drawing.Size(218, 19);
             this.check_Weldspeed.TabIndex = 87;
@@ -437,25 +480,16 @@ namespace GCodeRobotCSharpEdition
             // check_Noarc
             // 
             this.check_Noarc.AutoSize = true;
-            this.check_Noarc.Location = new System.Drawing.Point(82, 290);
+            this.check_Noarc.Location = new System.Drawing.Point(81, 264);
             this.check_Noarc.Name = "check_Noarc";
             this.check_Noarc.Size = new System.Drawing.Size(112, 19);
             this.check_Noarc.TabIndex = 85;
             this.check_Noarc.Text = "Run without Arc";
             this.check_Noarc.UseVisualStyleBackColor = true;
             // 
-            // edit_Name
-            // 
-            this.edit_Name.Enabled = false;
-            this.edit_Name.Location = new System.Drawing.Point(640, 248);
-            this.edit_Name.Name = "edit_Name";
-            this.edit_Name.Size = new System.Drawing.Size(279, 23);
-            this.edit_Name.TabIndex = 84;
-            this.edit_Name.Text = "output";
-            // 
             // edit_TN
             // 
-            this.edit_TN.Location = new System.Drawing.Point(200, 248);
+            this.edit_TN.Location = new System.Drawing.Point(519, 137);
             this.edit_TN.Name = "edit_TN";
             this.edit_TN.Size = new System.Drawing.Size(131, 23);
             this.edit_TN.TabIndex = 83;
@@ -464,7 +498,7 @@ namespace GCodeRobotCSharpEdition
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(82, 250);
+            this.label19.Location = new System.Drawing.Point(401, 139);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(111, 15);
             this.label19.TabIndex = 82;
@@ -472,69 +506,24 @@ namespace GCodeRobotCSharpEdition
             // 
             // edit_TW
             // 
-            this.edit_TW.Location = new System.Drawing.Point(458, 248);
+            this.edit_TW.Location = new System.Drawing.Point(523, 194);
             this.edit_TW.Name = "edit_TW";
-            this.edit_TW.Size = new System.Drawing.Size(131, 23);
+            this.edit_TW.Size = new System.Drawing.Size(127, 23);
             this.edit_TW.TabIndex = 81;
             this.edit_TW.Text = "CNT100 COORD PTH";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(336, 250);
+            this.label20.Location = new System.Drawing.Point(401, 196);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(115, 15);
             this.label20.TabIndex = 80;
             this.label20.Text = "Welding movement:";
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(720, 182);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(138, 15);
-            this.label18.TabIndex = 79;
-            this.label18.Text = "Additional Config String:";
-            // 
-            // edit_Config
-            // 
-            this.edit_Config.Enabled = false;
-            this.edit_Config.Location = new System.Drawing.Point(720, 200);
-            this.edit_Config.Name = "edit_Config";
-            this.edit_Config.Size = new System.Drawing.Size(199, 23);
-            this.edit_Config.TabIndex = 78;
-            // 
-            // edit_Units
-            // 
-            this.edit_Units.Enabled = false;
-            this.edit_Units.Location = new System.Drawing.Point(845, 155);
-            this.edit_Units.Name = "edit_Units";
-            this.edit_Units.Size = new System.Drawing.Size(68, 23);
-            this.edit_Units.TabIndex = 77;
-            this.edit_Units.Text = "cm/min";
-            // 
-            // edit_Speed
-            // 
-            this.edit_Speed.Enabled = false;
-            this.edit_Speed.Location = new System.Drawing.Point(720, 155);
-            this.edit_Speed.Name = "edit_Speed";
-            this.edit_Speed.Size = new System.Drawing.Size(115, 23);
-            this.edit_Speed.TabIndex = 76;
-            this.edit_Speed.Text = "1";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(720, 137);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(134, 15);
-            this.label17.TabIndex = 75;
-            this.label17.Text = "Speed scaling and units:";
-            // 
             // edit_J1
             // 
-            this.edit_J1.Enabled = false;
-            this.edit_J1.Location = new System.Drawing.Point(690, 137);
+            this.edit_J1.Location = new System.Drawing.Point(858, 14);
             this.edit_J1.Name = "edit_J1";
             this.edit_J1.Size = new System.Drawing.Size(24, 23);
             this.edit_J1.TabIndex = 74;
@@ -543,7 +532,7 @@ namespace GCodeRobotCSharpEdition
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(640, 139);
+            this.label14.Location = new System.Drawing.Point(808, 16);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(52, 15);
             this.label14.TabIndex = 73;
@@ -551,8 +540,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // edit_J4
             // 
-            this.edit_J4.Enabled = false;
-            this.edit_J4.Location = new System.Drawing.Point(690, 172);
+            this.edit_J4.Location = new System.Drawing.Point(858, 49);
             this.edit_J4.Name = "edit_J4";
             this.edit_J4.Size = new System.Drawing.Size(24, 23);
             this.edit_J4.TabIndex = 72;
@@ -561,7 +549,7 @@ namespace GCodeRobotCSharpEdition
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(640, 175);
+            this.label15.Location = new System.Drawing.Point(808, 52);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(52, 15);
             this.label15.TabIndex = 71;
@@ -569,8 +557,7 @@ namespace GCodeRobotCSharpEdition
             // 
             // edit_J6
             // 
-            this.edit_J6.Enabled = false;
-            this.edit_J6.Location = new System.Drawing.Point(690, 200);
+            this.edit_J6.Location = new System.Drawing.Point(858, 77);
             this.edit_J6.Name = "edit_J6";
             this.edit_J6.Size = new System.Drawing.Size(24, 23);
             this.edit_J6.TabIndex = 70;
@@ -579,7 +566,7 @@ namespace GCodeRobotCSharpEdition
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(640, 203);
+            this.label16.Location = new System.Drawing.Point(808, 80);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(52, 15);
             this.label16.TabIndex = 69;
@@ -587,17 +574,19 @@ namespace GCodeRobotCSharpEdition
             // 
             // box_Arm
             // 
-            this.box_Arm.Enabled = false;
-            this.box_Arm.Location = new System.Drawing.Point(539, 170);
+            this.box_Arm.Items.AddRange(new object[] {
+            "Up",
+            "Down"});
+            this.box_Arm.Location = new System.Drawing.Point(707, 47);
             this.box_Arm.Name = "box_Arm";
             this.box_Arm.Size = new System.Drawing.Size(90, 23);
             this.box_Arm.TabIndex = 68;
-            this.box_Arm.Text = "UP";
+            this.box_Arm.Text = "Down";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(496, 175);
+            this.label13.Location = new System.Drawing.Point(664, 52);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(33, 15);
             this.label13.TabIndex = 67;
@@ -605,17 +594,19 @@ namespace GCodeRobotCSharpEdition
             // 
             // box_Base
             // 
-            this.box_Base.Enabled = false;
-            this.box_Base.Location = new System.Drawing.Point(539, 200);
+            this.box_Base.Items.AddRange(new object[] {
+            "Front",
+            "Back"});
+            this.box_Base.Location = new System.Drawing.Point(707, 77);
             this.box_Base.Name = "box_Base";
             this.box_Base.Size = new System.Drawing.Size(90, 23);
             this.box_Base.TabIndex = 66;
-            this.box_Base.Text = "FRONT";
+            this.box_Base.Text = "Front";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(496, 203);
+            this.label12.Location = new System.Drawing.Point(664, 80);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(34, 15);
             this.label12.TabIndex = 65;
@@ -623,17 +614,19 @@ namespace GCodeRobotCSharpEdition
             // 
             // box_Wrist
             // 
-            this.box_Wrist.Enabled = false;
-            this.box_Wrist.Location = new System.Drawing.Point(539, 137);
+            this.box_Wrist.Items.AddRange(new object[] {
+            "Flip",
+            "No-Flip"});
+            this.box_Wrist.Location = new System.Drawing.Point(707, 14);
             this.box_Wrist.Name = "box_Wrist";
             this.box_Wrist.Size = new System.Drawing.Size(90, 23);
             this.box_Wrist.TabIndex = 64;
-            this.box_Wrist.Text = "NOFLIP";
+            this.box_Wrist.Text = "No-Flip";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(496, 143);
+            this.label11.Location = new System.Drawing.Point(664, 20);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(37, 15);
             this.label11.TabIndex = 63;
@@ -641,24 +634,24 @@ namespace GCodeRobotCSharpEdition
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.edit_UT);
+            this.groupBox3.Controls.Add(this.RUT);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.edit_UF);
+            this.groupBox3.Controls.Add(this.RUF);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(326, 124);
+            this.groupBox3.Location = new System.Drawing.Point(670, 124);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(127, 105);
             this.groupBox3.TabIndex = 62;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Default Frame";
+            this.groupBox3.Text = "Robot Frame";
             // 
-            // edit_UT
+            // RUT
             // 
-            this.edit_UT.Location = new System.Drawing.Point(38, 50);
-            this.edit_UT.Name = "edit_UT";
-            this.edit_UT.Size = new System.Drawing.Size(66, 23);
-            this.edit_UT.TabIndex = 25;
-            this.edit_UT.Text = "5";
+            this.RUT.Location = new System.Drawing.Point(38, 50);
+            this.RUT.Name = "RUT";
+            this.RUT.Size = new System.Drawing.Size(66, 23);
+            this.RUT.TabIndex = 25;
+            this.RUT.Text = "5";
             // 
             // label10
             // 
@@ -669,13 +662,13 @@ namespace GCodeRobotCSharpEdition
             this.label10.TabIndex = 24;
             this.label10.Text = "UT:";
             // 
-            // edit_UF
+            // RUF
             // 
-            this.edit_UF.Location = new System.Drawing.Point(38, 17);
-            this.edit_UF.Name = "edit_UF";
-            this.edit_UF.Size = new System.Drawing.Size(66, 23);
-            this.edit_UF.TabIndex = 23;
-            this.edit_UF.Text = "6";
+            this.RUF.Location = new System.Drawing.Point(38, 17);
+            this.RUF.Name = "RUF";
+            this.RUF.Size = new System.Drawing.Size(66, 23);
+            this.RUF.TabIndex = 23;
+            this.RUF.Text = "6";
             // 
             // label4
             // 
@@ -688,6 +681,10 @@ namespace GCodeRobotCSharpEdition
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.J1Offset);
+            this.groupBox2.Controls.Add(this.label46);
+            this.groupBox2.Controls.Add(this.J2Offset);
+            this.groupBox2.Controls.Add(this.label47);
             this.groupBox2.Controls.Add(this.edit_P);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.edit_R);
@@ -702,16 +699,50 @@ namespace GCodeRobotCSharpEdition
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(59, 124);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(251, 105);
+            this.groupBox2.Size = new System.Drawing.Size(336, 105);
             this.groupBox2.TabIndex = 61;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Code Offset";
+            // 
+            // J1Offset
+            // 
+            this.J1Offset.Location = new System.Drawing.Point(236, 13);
+            this.J1Offset.Name = "J1Offset";
+            this.J1Offset.Size = new System.Drawing.Size(38, 23);
+            this.J1Offset.TabIndex = 24;
+            this.J1Offset.Text = "0";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(203, 18);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(35, 15);
+            this.label46.TabIndex = 23;
+            this.label46.Text = "A(j1):";
+            // 
+            // J2Offset
+            // 
+            this.J2Offset.Location = new System.Drawing.Point(236, 43);
+            this.J2Offset.Name = "J2Offset";
+            this.J2Offset.Size = new System.Drawing.Size(38, 23);
+            this.J2Offset.TabIndex = 22;
+            this.J2Offset.Text = "0";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(203, 46);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(34, 15);
+            this.label47.TabIndex = 21;
+            this.label47.Text = "B(j2):";
             // 
             // edit_P
             // 
             this.edit_P.Location = new System.Drawing.Point(48, 43);
             this.edit_P.Name = "edit_P";
-            this.edit_P.Size = new System.Drawing.Size(66, 23);
+            this.edit_P.Size = new System.Drawing.Size(38, 23);
             this.edit_P.TabIndex = 20;
             this.edit_P.Text = "0";
             // 
@@ -728,7 +759,7 @@ namespace GCodeRobotCSharpEdition
             // 
             this.edit_R.Location = new System.Drawing.Point(48, 72);
             this.edit_R.Name = "edit_R";
-            this.edit_R.Size = new System.Drawing.Size(66, 23);
+            this.edit_R.Size = new System.Drawing.Size(38, 23);
             this.edit_R.TabIndex = 18;
             this.edit_R.Text = "0";
             // 
@@ -743,16 +774,16 @@ namespace GCodeRobotCSharpEdition
             // 
             // edit_X
             // 
-            this.edit_X.Location = new System.Drawing.Point(164, 14);
+            this.edit_X.Location = new System.Drawing.Point(148, 15);
             this.edit_X.Name = "edit_X";
-            this.edit_X.Size = new System.Drawing.Size(66, 23);
+            this.edit_X.Size = new System.Drawing.Size(38, 23);
             this.edit_X.TabIndex = 16;
             this.edit_X.Text = "0";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(133, 18);
+            this.label7.Location = new System.Drawing.Point(117, 18);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 15);
             this.label7.TabIndex = 15;
@@ -760,16 +791,16 @@ namespace GCodeRobotCSharpEdition
             // 
             // edit_Y
             // 
-            this.edit_Y.Location = new System.Drawing.Point(164, 43);
+            this.edit_Y.Location = new System.Drawing.Point(148, 43);
             this.edit_Y.Name = "edit_Y";
-            this.edit_Y.Size = new System.Drawing.Size(66, 23);
+            this.edit_Y.Size = new System.Drawing.Size(38, 23);
             this.edit_Y.TabIndex = 14;
             this.edit_Y.Text = "0";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(133, 46);
+            this.label6.Location = new System.Drawing.Point(117, 46);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 15);
             this.label6.TabIndex = 13;
@@ -777,16 +808,16 @@ namespace GCodeRobotCSharpEdition
             // 
             // edit_Z
             // 
-            this.edit_Z.Location = new System.Drawing.Point(164, 72);
+            this.edit_Z.Location = new System.Drawing.Point(148, 72);
             this.edit_Z.Name = "edit_Z";
-            this.edit_Z.Size = new System.Drawing.Size(66, 23);
+            this.edit_Z.Size = new System.Drawing.Size(38, 23);
             this.edit_Z.TabIndex = 12;
             this.edit_Z.Text = "50";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(133, 76);
+            this.label5.Location = new System.Drawing.Point(117, 76);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 15);
             this.label5.TabIndex = 11;
@@ -796,7 +827,7 @@ namespace GCodeRobotCSharpEdition
             // 
             this.edit_W.Location = new System.Drawing.Point(48, 14);
             this.edit_W.Name = "edit_W";
-            this.edit_W.Size = new System.Drawing.Size(66, 23);
+            this.edit_W.Size = new System.Drawing.Size(38, 23);
             this.edit_W.TabIndex = 8;
             this.edit_W.Text = "0";
             // 
@@ -811,44 +842,15 @@ namespace GCodeRobotCSharpEdition
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.edit_Outfile);
-            this.groupBox1.Controls.Add(this.label46);
             this.groupBox1.Controls.Add(this.OpenFile);
             this.groupBox1.Controls.Add(this.InputFile);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(56, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(953, 64);
+            this.groupBox1.Size = new System.Drawing.Size(509, 64);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "File settings";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(869, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(52, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Open";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // edit_Outfile
-            // 
-            this.edit_Outfile.Location = new System.Drawing.Point(606, 17);
-            this.edit_Outfile.Name = "edit_Outfile";
-            this.edit_Outfile.Size = new System.Drawing.Size(259, 23);
-            this.edit_Outfile.TabIndex = 4;
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(483, 20);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(99, 15);
-            this.label46.TabIndex = 3;
-            this.label46.Text = "Output Filename:";
             // 
             // OpenFile
             // 
@@ -866,6 +868,7 @@ namespace GCodeRobotCSharpEdition
             this.InputFile.Name = "InputFile";
             this.InputFile.Size = new System.Drawing.Size(272, 23);
             this.InputFile.TabIndex = 1;
+            this.InputFile.TextChanged += new System.EventHandler(this.InputFile_TextChanged);
             // 
             // label1
             // 
@@ -935,7 +938,7 @@ namespace GCodeRobotCSharpEdition
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1111, 454);
+            this.tabPage3.Size = new System.Drawing.Size(1015, 454);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Tool Settings";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -948,7 +951,6 @@ namespace GCodeRobotCSharpEdition
             this.apply.TabIndex = 53;
             this.apply.Text = "apply";
             this.apply.UseVisualStyleBackColor = true;
-            this.apply.Click += new System.EventHandler(this.apply_Click);
             // 
             // SurfacingSpeed
             // 
@@ -1078,7 +1080,6 @@ namespace GCodeRobotCSharpEdition
             this.Surfacing.TabIndex = 38;
             this.Surfacing.Text = "Surfacing";
             this.Surfacing.UseVisualStyleBackColor = true;
-            this.Surfacing.CheckedChanged += new System.EventHandler(this.Surfacing_CheckedChanged);
             // 
             // label33
             // 
@@ -1159,7 +1160,6 @@ namespace GCodeRobotCSharpEdition
             this.Pyrometer.TabIndex = 29;
             this.Pyrometer.Text = "Pyrometer";
             this.Pyrometer.UseVisualStyleBackColor = true;
-            this.Pyrometer.CheckedChanged += new System.EventHandler(this.Pyrometer_CheckedChanged);
             // 
             // label37
             // 
@@ -1240,7 +1240,6 @@ namespace GCodeRobotCSharpEdition
             this.Laser.TabIndex = 20;
             this.Laser.Text = "Laser meter";
             this.Laser.UseVisualStyleBackColor = true;
-            this.Laser.CheckedChanged += new System.EventHandler(this.Laser_CheckedChanged);
             // 
             // label29
             // 
@@ -1321,7 +1320,6 @@ namespace GCodeRobotCSharpEdition
             this.Cutter.TabIndex = 11;
             this.Cutter.Text = "Cutter";
             this.Cutter.UseVisualStyleBackColor = true;
-            this.Cutter.CheckedChanged += new System.EventHandler(this.Cutter_CheckedChanged);
             // 
             // label28
             // 
@@ -1425,7 +1423,6 @@ namespace GCodeRobotCSharpEdition
             this.Hammer.TabIndex = 0;
             this.Hammer.Text = "Hammer";
             this.Hammer.UseVisualStyleBackColor = true;
-            this.Hammer.CheckedChanged += new System.EventHandler(this.Hummer_CheckedChanged);
             // 
             // tabPage2
             // 
@@ -1441,7 +1438,7 @@ namespace GCodeRobotCSharpEdition
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1111, 454);
+            this.tabPage2.Size = new System.Drawing.Size(1015, 454);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Send to robot";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1525,38 +1522,38 @@ namespace GCodeRobotCSharpEdition
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Address,
             this.State});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(3, 70);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(402, 384);
@@ -1597,7 +1594,7 @@ namespace GCodeRobotCSharpEdition
             this.обновленияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1126, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1030, 24);
             this.menuStrip1.TabIndex = 58;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1628,7 +1625,7 @@ namespace GCodeRobotCSharpEdition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1126, 508);
+            this.ClientSize = new System.Drawing.Size(1030, 508);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1639,6 +1636,8 @@ namespace GCodeRobotCSharpEdition
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1673,22 +1672,10 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.CheckBox check_Weldspeed;
         private System.Windows.Forms.CheckBox check_Layers;
         private System.Windows.Forms.CheckBox check_Noarc;
-        private System.Windows.Forms.TextBox edit_Name;
         private System.Windows.Forms.TextBox edit_TN;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox edit_TW;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox edit_Config;
-        private System.Windows.Forms.ComboBox edit_Units;
-        private System.Windows.Forms.TextBox edit_Speed;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox edit_J1;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox edit_J4;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox edit_J6;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox box_Arm;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox box_Base;
@@ -1696,9 +1683,9 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.ComboBox box_Wrist;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox edit_UT;
+        private System.Windows.Forms.TextBox RUT;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox edit_UF;
+        private System.Windows.Forms.TextBox RUF;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox edit_P;
@@ -1714,8 +1701,6 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.TextBox edit_W;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox edit_Outfile;
         private System.Windows.Forms.Button OpenFile;
         private System.Windows.Forms.TextBox InputFile;
         private System.Windows.Forms.Label label1;
@@ -1792,7 +1777,6 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.CheckBox Wave;
         private System.Windows.Forms.CheckBox RO;
-        private System.Windows.Forms.Label label46;
         private System.Windows.Forms.TextBox Degree_def;
         private System.Windows.Forms.CheckBox WeldSheild;
         private System.Windows.Forms.TextBox WaweInd;
@@ -1800,6 +1784,21 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox Laser_pass;
+        private System.Windows.Forms.TextBox edit_J1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox edit_J4;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox edit_J6;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox PUT;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox PUF;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox J1Offset;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox J2Offset;
+        private System.Windows.Forms.Label label47;
     }
 }
 
