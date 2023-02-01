@@ -4,6 +4,11 @@
         <name>GCodeRobotCSharpEdition</name>
     </assembly>
     <members>
+        <member name="M:GCodeRobotCSharpEdition.ConverterGcode.OpenFile">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:GCodeRobotCSharpEdition.Form1.components">
             <summary>
              Required designer variable.

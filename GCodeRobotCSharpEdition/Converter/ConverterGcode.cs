@@ -14,7 +14,7 @@ namespace GCodeRobotCSharpEdition
 {
     public class ConverterGcode
     {
-        private Form1 _form;
+        private InputParametrs _form;
         private coordinates _current, _previous;
         private gcode_variable _gcode;
         private bool _movement;
@@ -25,10 +25,10 @@ namespace GCodeRobotCSharpEdition
 
         public List<point> LayerPoints = new List<point>();
 
-        public ConverterGcode(Form1 form)
+        public ConverterGcode(InputParametrs form, OutputFileOptions output)
         {
             this._form = form;
-            fanuc = new Fanuc(_form);
+            fanuc = new Fanuc(_form, output);
         }
 
         /// <summary>
@@ -36,12 +36,7 @@ namespace GCodeRobotCSharpEdition
         /// </summary>
         public void OpenFile()
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "GCode (*.gcode *.gc *.nc) |*.gcode; *.gc' *.nc| Other files (*.*)|*.*";
-            if (openFile.ShowDialog() == DialogResult.Cancel)
-                return;
-            // получаем выбранный файл
-            _form.InputFileInfo = openFile.FileName;
+            
         }
         
         //обработка gcode
@@ -127,7 +122,7 @@ namespace GCodeRobotCSharpEdition
                  {
                     // Linear move
 
-                    if (_form.AutoArc)
+                    if (_form.Auto_arc)
                     {
                         if (_current.e - _previous.e > 0) _current.states = PrintStatesEnum.Printing;
                         else _current.states = PrintStatesEnum.Move;
@@ -157,13 +152,9 @@ namespace GCodeRobotCSharpEdition
             return Params;
         }
 
-        public void Generate()
+        public void Generate(string input)
         {
-            string inputFile = _form.Input;
-
-            StreamReader sr = new StreamReader(inputFile);
-            var m1 = Regex.Matches(sr.ReadToEnd(), @"(?!; *.+)(G|M|T|g|m|t)(\d+)(([ \t]*(?!G|M|g|m)\w('.*'|([-\d\.]*)))*)[ \t]*(;[ \t]*(.*))?|;[ \t]*(.+)");
-            sr.Close();
+            var m1 = Regex.Matches(input, @"(?!; *.+)(G|M|T|g|m|t)(\d+)(([ \t]*(?!G|M|g|m)\w('.*'|([-\d\.]*)))*)[ \t]*(;[ \t]*(.*))?|;[ \t]*(.+)");            
             var gLines = new List<Group[]>();
             foreach (Match match in m1)
             {

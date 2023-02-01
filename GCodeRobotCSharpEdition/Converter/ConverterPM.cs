@@ -16,7 +16,7 @@ namespace GCodeRobotCSharpEdition
     class ConverterPM
     {
         private LSLineInfo lineLSR;
-        private Form1 _form;
+        private InputParametrs _form;
         private coordinates _current, _previous;
         private int _pointcount;
         private bool _movement;
@@ -27,21 +27,16 @@ namespace GCodeRobotCSharpEdition
         public List<point> LayerPoints = new List<point>();
         private Fanuc fanuc;
 
-        public ConverterPM(Form1 form)
+        public ConverterPM(InputParametrs form, OutputFileOptions output)
         {
             this._form = form;
-            fanuc = new Fanuc(_form);
+            fanuc = new Fanuc(_form, output);
         }
 
         //загрузка файла
         public void on_btn_Open_clicked()
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "PowerMill (*.lsr ) |*.lsr; | Other files (*.*)|*.*";
-            if (openFile.ShowDialog() == DialogResult.Cancel)
-                return;
-            // получаем выбранный файл
-            _form.InputFileInfo = openFile.FileName;
+            
         }
 
         private string conv;
@@ -88,7 +83,7 @@ namespace GCodeRobotCSharpEdition
                     _movement = true;
                     _current.feedrate = (int)Math.Round(lineLSR.getFloat(lineLSR.Speed));
 
-                    if (_form.AutoArc)
+                    if (_form.Auto_arc)
                     {
                         _current.states = PrintStatesEnum.Move;
                     }
@@ -120,7 +115,7 @@ namespace GCodeRobotCSharpEdition
                         MessageBox.Show(e.ToString());
                     }
 
-                    if (_form.AutoArc)
+                    if (_form.Auto_arc)
                     {
                         _current.states = PrintStatesEnum.Printing;
                     }
@@ -144,7 +139,7 @@ namespace GCodeRobotCSharpEdition
                     _current.c = lineLSR.getFloat(lineLSR.ArcZ);
                     _current.feedrate = (int)Math.Round(lineLSR.getFloat(PrevLine.Speed));
 
-                    if (_form.AutoArc)
+                    if (_form.Auto_arc)
                     {
                         _current.states = PrintStatesEnum.Printing;
                     }
@@ -165,7 +160,7 @@ namespace GCodeRobotCSharpEdition
                     _movement = true;
                     _current.feedrate = (int)Math.Round(lineLSR.getFloat(lineLSR.Speed));
 
-                    if (_form.AutoArc)
+                    if (_form.Auto_arc)
                     {
                         _current.states = PrintStatesEnum.Move;
                     }
@@ -188,13 +183,9 @@ namespace GCodeRobotCSharpEdition
             }
         }
 
-        public void on_btn_Process_clicked()
-        {
-
-            string inputFile = _form.Input;
-
-            
-            using(StreamReader sr = new StreamReader(inputFile))
+        public void Generate(string input)
+        {            
+            using(StreamReader sr = new StreamReader(input))
             {
                 while (!sr.EndOfStream)
                 {
@@ -204,11 +195,7 @@ namespace GCodeRobotCSharpEdition
                     if (!line.Contains("#"))
                     {
                         ProcessLine(line);
-
-                        if (_pointcount >= (float)Convert.ToDouble(_form.esplit) && !_form.CheckLayer)
-                        {
-                            _pointcount = 0;
-                        }
+                       
                     }
                 }
             }

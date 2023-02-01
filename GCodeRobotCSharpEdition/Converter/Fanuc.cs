@@ -17,13 +17,15 @@ namespace GCodeRobotCSharpEdition.Converter
     public class Fanuc
     {
 
-        private Form1 _form;
+        private InputParametrs _form;
+        private readonly OutputFileOptions output;
 
-        public Fanuc(Form1 form)
+        public Fanuc(InputParametrs form, OutputFileOptions output)
         {
             header = new List<string>();
             footer = new List<string>();
             _form = form;
+            this.output = output;
         }
 
         private int _pointcount = 0;
@@ -89,14 +91,14 @@ namespace GCodeRobotCSharpEdition.Converter
             c.positioner = positioner;
             header.Clear();
             footer.Clear();
-            points.Insert(0,c);
+            //points.Insert(0,c);
 
             coordinates _current = new coordinates();
             coordinates _previous;
             _current.states = PrintStatesEnum.Move;
             foreach (var point in points)
             {
-                if (_pointcount >= Convert.ToInt32(_form.esplit) && !_form.CheckLayer)
+                if (_pointcount >= Convert.ToInt32(output.Esplit) && !output.CheckLayer)
                 {
                     header.Add(": Arc End[1];");
                     WriteFile();
@@ -108,30 +110,30 @@ namespace GCodeRobotCSharpEdition.Converter
                 string termination = "";
                 
 
-                if (_current.states == PrintStatesEnum.Move) termination = _form.Tn;
-                if (_current.states == PrintStatesEnum.Printing) termination = _form.Tw;
+                if (_current.states == PrintStatesEnum.Move) termination = _form.nm;
+                if (_current.states == PrintStatesEnum.Printing) termination = _form.wm;
 
-                if (!_form.noArc)
+                if (!_form.Arc_disable)
                 {
-                    if (_form.AutoArc)
+                    if (_form.Auto_arc)
                     {
                         if (_current.states == PrintStatesEnum.Move && _previous.states == PrintStatesEnum.Printing)
                         {
                             header.Add(": Arc End[1];");
-                            if (_form.GetRO)
+                            if (_form.RO)
                                 header.Add(": RO[1]=OFF;");
-                            if (_form.GetWave)
-                                header.Add($": Weave End[{_form.WaveIndex}];");
+                            if (_form.WEE)
+                                header.Add($": Weave End[{_form.WE}];");
                             PrevEnd = true;
                         }
 
                         if (_current.states == PrintStatesEnum.Printing && _previous.states == PrintStatesEnum.Move)
                         {
                             header.Add(": Arc Start[1];");
-                            if (_form.GetRO)
+                            if (_form.RO)
                                 header.Add(": RO[1]=ON;");
-                            if (_form.GetWave)
-                                header.Add($": Weave Sine[{_form.WaveIndex}];");
+                            if (_form.WEE)
+                                header.Add($": Weave Sine[{_form.WE}];");
                             PrevStart = true;
                         }
                     }
@@ -139,9 +141,9 @@ namespace GCodeRobotCSharpEdition.Converter
                     if (_arcenabled == 1)
                     {
                         header.Add(": Arc Start[1];");
-                        if (_form.GetWave)
+                        if (_form.WEE)
                             header.Add(": RO[1]=ON;");
-                        if (_form.GetWave)
+                        if (_form.WEE)
                             header.Add(": Weave Sine[2];");
                         _arcenabled = 0;
                         PrevStart = true;
@@ -150,9 +152,9 @@ namespace GCodeRobotCSharpEdition.Converter
                     if (_arcenabled == 2)
                     {
                         header.Add(": Arc End[1];");
-                        if (_form.GetWave)
+                        if (_form.WEE)
                             header.Add(": RO[1]=OFF;");
-                        if (_form.GetWave)
+                        if (_form.WEE)
                             header.Add(": Weave End[2];");
 
                         _arcenabled = 0;
@@ -170,18 +172,18 @@ namespace GCodeRobotCSharpEdition.Converter
                 else if (x < -180)
                     x += 360;
                 bool _isNeed = false;
-                if ((Math.Abs(prevY - y) > _form.DefDegree || Math.Abs(prevX - x) > _form.DefDegree) && _form.WieldShield)
+                if ((Math.Abs(prevY - y) > int.Parse(_form.WS) || Math.Abs(prevX - x) >int.Parse(_form.WS)) && _form.WSE)
                 {
                     header.Add(": Arc start [2];");
                     _isNeed = true;
                 }
-                else if (_isNeed && _form.WieldShield)
+                else if (_isNeed && _form.WSE)
                 {
                     header.Add(": Arc Start[1];");
-                    if (_form.GetWave)
+                    if (_form.WEE)
                         header.Add(": RO[1]=ON;");
-                    if (_form.GetWave)
-                        header.Add($": Weave Sine[{_form.WaveIndex}];");
+                    if (_form.WEE)
+                        header.Add($": Weave Sine[{_form.WE}];");
                     _arcenabled = 0;
                     PrevStart = true;
                 }
@@ -193,31 +195,29 @@ namespace GCodeRobotCSharpEdition.Converter
 
 
                     float value;
-                    value = _current.feedrate / 10 * (float)Convert.ToDouble(_form.Es);
+                    value = _current.feedrate / 10 * (float)Convert.ToDouble("1");
                     int feed = (int)Math.Round(value);
 
-                    if (_form.WeldSpeed && (/*_current.states.Contains("A") ||*/ _current.states == PrintStatesEnum.Printing))
+                    if (_form.WELD_SPEED && (/*_current.states.Contains("A") ||*/ _current.states == PrintStatesEnum.Printing))
                     {
                         line += "WELD_SPEED ";
                     }
                     else
                     {
                         line += feed;
-                        line += _form.unit;
+                        line += "cm/min";
                         line += " ";
                     }
 
                     line += termination;
-                    line += " ";
-                    line += _form.econf;
                     line += " ;";
                     header.Add(line);
 
                     line = "";
                     footer.Add("P[" + _pointcount + "] {");
                     footer.Add("   GP1:");
-                    line = "       UF : " + _form.Uf + ", UT : " + _form.Ut +
-                           ",     CONFIG: 'N U T, 0, 0, 0',";
+                    line = "       UF : " + _form.RUF + ", UT : " + _form.RUT +
+                           $",     CONFIG: '{_form.W} {_form.A} {_form.B}, {_form.j1}, {_form.j4}, {_form.j6}',";
                     footer.Add(line);
 
                     coord.x = _current.x;
@@ -245,34 +245,34 @@ namespace GCodeRobotCSharpEdition.Converter
                     coord_rotate(positioner.j1, 0, positioner.j2);
 
 
-                    value = float.Parse(_form.X, CultureInfo.InvariantCulture.NumberFormat) + coord.x;
+                    value = float.Parse(_form.x, CultureInfo.InvariantCulture.NumberFormat) + coord.x;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line = "      X = " + Conv + " mm, ";
-                    value = float.Parse(_form.Y, CultureInfo.InvariantCulture.NumberFormat) + coord.y;
+                    value = float.Parse(_form.y, CultureInfo.InvariantCulture.NumberFormat) + coord.y;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line += "Y = " + Conv + " mm, ";
-                    value = float.Parse(_form.Z, CultureInfo.InvariantCulture.NumberFormat) + coord.z;
+                    value = float.Parse(_form.z, CultureInfo.InvariantCulture.NumberFormat) + coord.z;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line += "Z = " + Conv + " mm,";
                     footer.Add(line);
-                    value = float.Parse(_form.W, CultureInfo.InvariantCulture.NumberFormat) + coord.w;
+                    value = float.Parse(_form.w, CultureInfo.InvariantCulture.NumberFormat) + coord.w;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line = "      W = " + Conv + " deg, ";
-                    value = float.Parse(_form.P, CultureInfo.InvariantCulture.NumberFormat) + coord.p;
+                    value = float.Parse(_form.p, CultureInfo.InvariantCulture.NumberFormat) + coord.p;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line += "P = " + Conv + " deg, ";
-                    value = float.Parse(_form.R, CultureInfo.InvariantCulture.NumberFormat) + coord.r;
+                    value = float.Parse(_form.r, CultureInfo.InvariantCulture.NumberFormat) + coord.r;
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     line += "R = " + Conv + " deg";
                     footer.Add(line);
                     footer.Add("   GP2:");
-                    footer.Add("       UF : 1, UT : 2,");
-                    value = positioner.j1;
+                    footer.Add($"       UF : {_form.PUF}, UT : {_form.PUT},");
+                    value = positioner.j1 + int.Parse(_form.j1o);
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     if (!Conv.Contains(".")) Conv += ".0";
                     line = "      J1 = " + Conv + " deg, ";
 
-                    value = positioner.j2;
+                    value = positioner.j2 + int.Parse(_form.j1o);
                     Conv = Math.Round(value, 1).ToString(myCIintl);
                     if (!Conv.Contains(".")) Conv += ".0";
                     line += "J2 = " + Conv + " deg ";
@@ -281,21 +281,19 @@ namespace GCodeRobotCSharpEdition.Converter
                     footer.Add("};");
                     
                 }
-                _pointcount++;
             }
 
             WriteFile(true);
-            string outDir = _form.OutFile.Substring(0, _form.OutFile.LastIndexOf('\\'));
-            outDir = outDir.Substring(0, outDir.LastIndexOf('\\') + 1) + "layer";
-            if (_form.CheckLayer)
+            string outDir = Path.GetDirectoryName(output.OutputFile);
+            if (output.CheckLayer)
             {
                 ProcessStartInfo psipy = new ProcessStartInfo();
                 psipy.CreateNoWindow = false;
                 psipy.WindowStyle = ProcessWindowStyle.Normal;
-                string cmdString = @$"/k ""python Scrypts\Slicer.py {_form.OutFile} {outDir}""";
+                string cmdString = @$"/k ""python Scrypts\Slicer.py {output.OutputFile} {outDir}""";
 
                 //cmdString += outDir;
-                if (_form.LaserPass)
+                if (output.LaserPass)
                     cmdString += " d";
                 Process Slice = new Process();
                 psipy.FileName = "cmd";
@@ -306,7 +304,7 @@ namespace GCodeRobotCSharpEdition.Converter
             MessageBox.Show("done");
             Process PrFolder = new Process();
             ProcessStartInfo psi = new ProcessStartInfo();
-            string file = _form.OutFile;
+            string file = output.OutputFile;
             psi.CreateNoWindow = true;
             psi.WindowStyle = ProcessWindowStyle.Normal;
             psi.FileName = "explorer";
@@ -357,24 +355,25 @@ namespace GCodeRobotCSharpEdition.Converter
         }
 
 
-        void WriteFile(bool offArcinEnd = false)
+        void WriteFile(bool offArcInEnd = false)
         {
-            string outname = _form.FName + "_" + _filepart;
-            if (!Directory.Exists(_form.OutputFile))
+            string outname = output.FName + "_" + _filepart;
+            if (!Directory.Exists(Path.GetDirectoryName(output.OutputFile)))
             {
-                Directory.CreateDirectory(_form.OutputFile);
+                var f = Path.GetDirectoryName(output.OutputFile);
+                Directory.CreateDirectory(f);
             }
 
-            StreamWriter sw = new StreamWriter(_form.OutputFile + outname + ".ls");
+            StreamWriter sw = new StreamWriter(Path.Combine(output.OutputFile, outname + ".ls"));
 
-            if (offArcinEnd)
+            if (offArcInEnd)
             {
                 header.Add(": Arc End[1];");
             }
             
             List<string> starter = new List<string>();
 
-            string line = "/PROG " + _form.FName;
+            string line = "/PROG " + output.FName;
             if (_filepart > 0) line += "_" + _filepart;
             starter.Add(line);
             starter.Add("/ATTR");
