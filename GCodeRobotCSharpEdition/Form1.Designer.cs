@@ -1801,4 +1801,3 @@ namespace GCodeRobotCSharpEdition
         private System.Windows.Forms.Label label47;
     }
 }
-

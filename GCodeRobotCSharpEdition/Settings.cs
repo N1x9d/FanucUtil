@@ -12,18 +12,14 @@ using System.Windows.Forms;
 
 namespace GCodeRobotCSharpEdition
 {
-    
     public partial class Settings : Form
     {
-        
-        
         public Settings()
         {
             InitializeComponent();
             setFormData();
         }
 
-        
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
@@ -40,13 +36,14 @@ namespace GCodeRobotCSharpEdition
             }
         }
 
-       
 
         private void Save_Click(object sender, EventArgs e)
         {
             Form1.sets.Save();
         }
+
         private bool IgnorRule = false;
+
         private void NextLayerDelay_CheckedChanged(object sender, EventArgs e)
         {
             if (!IgnorRule)
@@ -69,26 +66,27 @@ namespace GCodeRobotCSharpEdition
             if (openFile.ShowDialog() == DialogResult.Cancel)
                 return;
             // получаем выбранный файл
-           Form1.sets.Load( openFile.FileName);
+            Form1.sets.Load(openFile.FileName);
         }
+
         private void setFormData()
         {
             IgnorRule = true;
             var a = Form1.sets.Params;
             foreach (var param in a)
             {
-                if (SetSpace( param.ParamName) == NextLayerBD.Name.ToString())
-                {   NextLayerBD.Checked = true;
+                if (SetSpace(param.ParamName) == NextLayerBD.Name.ToString())
+                {
+                    NextLayerBD.Checked = true;
                     textBox2.Text = param.ParamValue;
-                    
                 }
                 else if (SetSpace(param.ParamName) == NextLayerDelay.Name.ToString())
-                {   
+                {
                     NextLayerDelay.Checked = true;
                     textBox1.Text = param.ParamValue;
-                    
                 }
             }
+
             IgnorRule = false;
         }
 
@@ -96,6 +94,7 @@ namespace GCodeRobotCSharpEdition
         {
             return inp.Replace(" ", "_");
         }
+
         private string SetSpace(string inp)
         {
             return inp.Replace("_", " ");
@@ -103,12 +102,11 @@ namespace GCodeRobotCSharpEdition
 
         private void Settings_Load(object sender, EventArgs e)
         {
-
         }
 
         private void Drop_Click(object sender, EventArgs e)
         {
-            Form1.Blank();   
+            Form1.Blank();
         }
     }
 }

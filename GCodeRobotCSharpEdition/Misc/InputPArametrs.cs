@@ -30,7 +30,7 @@
         public string B { get; set; }
         public bool Arc_disable { get; set; }
 
-        public bool Chechs { get; set; }        
+        public bool Chechs { get; set; }
         public bool Auto_arc { get; set; }
         public bool WELD_SPEED { get; set; }
         public bool WSE { get; set; }

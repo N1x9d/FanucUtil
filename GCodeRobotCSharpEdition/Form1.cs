@@ -18,13 +18,26 @@ namespace GCodeRobotCSharpEdition
     public partial class Form1 : Form
     {
         private ConverterGcode conv;
+
         private ConverterPM convPM;
+
         //public List<Tool> toolList { get; set; } = new List<Tool>();
         public static Setting sets;
 
-        public string j1 { get { return edit_J1.Text; } }
-        public string j4 { get { return edit_J4.Text; } }
-        public string j6 { get { return edit_J6.Text; } }
+        public string j1
+        {
+            get { return edit_J1.Text; }
+        }
+
+        public string j4
+        {
+            get { return edit_J4.Text; }
+        }
+
+        public string j6
+        {
+            get { return edit_J6.Text; }
+        }
 
         public string Wrist
         {
@@ -66,6 +79,7 @@ namespace GCodeRobotCSharpEdition
         {
             get { return J1Offset.Text; }
         }
+
         public string j2o
         {
             get { return J2Offset.Text; }
@@ -115,23 +129,32 @@ namespace GCodeRobotCSharpEdition
         {
             get { return edit_TN.Text; }
         }
+
         public bool noArc
         {
             get { return check_Noarc.Checked; }
         }
+
         public bool AutoArc
         {
             get { return check_Autoarc.Checked; }
         }
+
         public bool WeldSpeed
         {
             get { return check_Weldspeed.Checked; }
         }
+
         public bool CheckLayer
         {
             get { return check_Layers.Checked; }
         }
-        public bool LaserPass { get { return Laser_pass.Checked; } }
+
+        public bool LaserPass
+        {
+            get { return Laser_pass.Checked; }
+        }
+
         public string unit
         {
             get { return "cm/min"; }
@@ -141,26 +164,25 @@ namespace GCodeRobotCSharpEdition
         {
             get { return edit_Split.Text; }
         }
+
         public string OutFile { get; set; }
 
         public string Input
         {
-            get
-            {
-                return InputFile.Text;
-            }
+            get { return InputFile.Text; }
         }
-        public int WaveIndex { get { return int.Parse(WaweInd.Text); } }
-        public string FName { get; set; }
 
+        public int WaveIndex
+        {
+            get { return int.Parse(WaweInd.Text); }
+        }
+
+        public string FName { get; set; }
 
 
         public string InputFileInfo
         {
-            get
-            {
-                return InputFile.Text;
-            }
+            get { return InputFile.Text; }
             set
             {
                 string filename = value;
@@ -178,41 +200,36 @@ namespace GCodeRobotCSharpEdition
                 {
                     checkBox2.Enabled = true;
                     InputFile.Text = filename;
-
                 }
             }
         }
 
         public bool Chechs
         {
-            get
-            {
-                return check_startStop_Distance.Checked;
-            }
+            get { return check_startStop_Distance.Checked; }
         }
 
         public string CheckDist
         {
-            get
-            {
-                return CheckDistance.Text;
-            }
+            get { return CheckDistance.Text; }
         }
 
         public string OutputFile
         {
-            get
-            {
-                return OutFile;
-            }
-            set
-            {
-                OutFile = value;
-            }
+            get { return OutFile; }
+            set { OutFile = value; }
         }
-        public bool WieldShield { get { return WeldSheild.Checked; } }
-        public int DefDegree { get { return int.Parse(Degree_def.Text); } }
-        
+
+        public bool WieldShield
+        {
+            get { return WeldSheild.Checked; }
+        }
+
+        public int DefDegree
+        {
+            get { return int.Parse(Degree_def.Text); }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -232,6 +249,7 @@ namespace GCodeRobotCSharpEdition
         }
 
         private List<robotVisualize> robotsList = new List<robotVisualize>();
+
         private void WeldSheild_CheckedChanged(object sender, EventArgs e)
         {
             if (!WeldSheild.Checked)
@@ -243,14 +261,12 @@ namespace GCodeRobotCSharpEdition
                 Degree_def.Enabled = true;
             }
         }
-        
+
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
         }
 
-
-      
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -258,28 +274,28 @@ namespace GCodeRobotCSharpEdition
             if (!checkBox2.Checked)
             {
                 var converter = new ConverterGcode(new InputParametrs(this), outPutParams);
-                using(var sr = new StreamReader(InputFile.Text))
+                using (var sr = new StreamReader(InputFile.Text))
                 {
                     converter.Generate(sr.ReadToEnd());
-                }                
+                }
             }
-                
+
             else
             {
                 var converter = new ConverterPM(new InputParametrs(this), outPutParams);
                 converter.Generate(InputFile.Text);
             }
-            checkBox2.Enabled = true ;
+
+            checkBox2.Enabled = true;
         }
 
         private void check_startStop_Distance_CheckedChanged(object sender, EventArgs e)
         {
             var a = sender as CheckBox;
-            if(a.Checked)
+            if (a.Checked)
             {
                 CheckDistance.Visible = true;
                 label21.Visible = true;
-                
             }
             else
             {
@@ -288,12 +304,9 @@ namespace GCodeRobotCSharpEdition
             }
         }
 
-      
-
 
         private void OpenFile_Click_1(object sender, EventArgs e)
         {
-            
             if (!checkBox2.Checked)
             {
                 OpenFileDialog openFile = new OpenFileDialog();
@@ -313,13 +326,24 @@ namespace GCodeRobotCSharpEdition
                 InputFileInfo = openFile.FileName;
             }
 
-            if(InputFile.Text!="")
+            if (InputFile.Text != "")
                 checkBox2.Enabled = false;
         }
+
         private bool _RO;
         private bool _wave;
-        public bool GetRO { get { return _RO; } private set => _RO = value; }
-        public bool GetWave { get { return _wave; } private set => _wave = value; }
+
+        public bool GetRO
+        {
+            get { return _RO; }
+            private set => _RO = value;
+        }
+
+        public bool GetWave
+        {
+            get { return _wave; }
+            private set => _wave = value;
+        }
 
         private void Wave_CheckedChanged(object sender, EventArgs e)
         {
@@ -333,8 +357,6 @@ namespace GCodeRobotCSharpEdition
                 WaweInd.Enabled = false;
                 GetWave = false;
             }
-            
-                
         }
 
         public bool GetWawe
@@ -349,6 +371,7 @@ namespace GCodeRobotCSharpEdition
             else
                 GetRO = false;
         }
+
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
@@ -364,8 +387,6 @@ namespace GCodeRobotCSharpEdition
             else
                 CheckDistance.Enabled = false;
         }
-
-
 
 
 //TOOL TAB IN WORKING (FREEZ)
@@ -422,7 +443,7 @@ namespace GCodeRobotCSharpEdition
         //        CutterSpeed.Enabled = false;
         //    }
         //}
-       
+
         //private void Laser_CheckedChanged(object sender, EventArgs e)
         //{
         //    if (Laser.Checked)
@@ -476,8 +497,8 @@ namespace GCodeRobotCSharpEdition
         //        PyrometerSpeed.Enabled = false;
         //    }
         //}
-      
-       
+
+
         //private void Surfacing_CheckedChanged(object sender, EventArgs e)
         //{
         //    if (Surfacing.Checked)
@@ -511,7 +532,6 @@ namespace GCodeRobotCSharpEdition
             LaserLayer.Text = value;
             PyrometerLayer.Text = value;
             SurfacingLayer.Text = value;
-
         }
         //private void SetX (string tool, float val)
         //{
@@ -580,14 +600,13 @@ namespace GCodeRobotCSharpEdition
         //        SetSpeed("Surfacing", float.Parse(SurfacingSpeed.Text));
         //        SetLayer("Surfacing", int.Parse(SurfacingLayer.Text));
         //    }
-            
-           
-            
+
+
         //}
 
         private void HummerLayer_TextChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
                 ForAllLyaer(HammerLayer.Text);
         }
 
@@ -631,51 +650,45 @@ namespace GCodeRobotCSharpEdition
             //            rob.extension = ".ls";
 
             //}
-
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
-        
 
         private void проверитьОбновленияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Blank();
         }
-         public static void Blank()
+
+        public static void Blank()
         {
             MessageBox.Show("В будущих версиях");
         }
+
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings set = new Settings();
             set.Show();
         }
 
-        
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex == 1)
-            {   
+            {
                 Blank();
                 tabControl1.SelectedIndex = 0;
-
             }
-               
         }
 
         // SEND TO ROBOT TAB
@@ -686,7 +699,6 @@ namespace GCodeRobotCSharpEdition
             var i = 0;
             foreach (var item in robotsList)
             {
-
                 dataGridView1.Rows.Add(i, item.robot.Addres, item.robot.stateTempl.CurrentState);
                 dataGridView1.Rows[i].Cells[2].Style.ForeColor = item.robot.stateTempl.color;
                 i++;
@@ -696,24 +708,20 @@ namespace GCodeRobotCSharpEdition
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             robotsList[e.RowIndex].form.Show();
-
         }
 
         private void Print_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog FBD = new FolderBrowserDialog();
             FBD.ShowNewFolderButton = false;
-            
+
 
             if (FBD.ShowDialog() == DialogResult.OK)
             {
-
                 var dirName = FBD.SelectedPath.Substring(FBD.SelectedPath.LastIndexOf("\\") + 1);
-                
-               
             }
-            
         }
+
         private void UpdateAllStates(object Sender, EventArgs e)
         {
             UpdateRobotTable();
@@ -730,8 +738,8 @@ namespace GCodeRobotCSharpEdition
                 r.form = form;
                 robotsList.Add(new robotVisualize(r, form));
             }
-            UpdateRobotTable();
 
+            UpdateRobotTable();
         }
 
 
@@ -760,10 +768,12 @@ namespace GCodeRobotCSharpEdition
                     file.WriteLine(@"Output=C:\Users\02Robot\Documents\My Workcells\Fanuc_002\Robot_1\output");
                     file.Close();
                 }
+
                 var startInfo = new ProcessStartInfo()
                 {
                     FileName = "cmd.exe",
-                    Arguments = @$"/k ""maketp {filePath.Substring(filePath.LastIndexOf('\\') + 1)}""",//закрываем консоль
+                    Arguments =
+                        @$"/k ""maketp {filePath.Substring(filePath.LastIndexOf('\\') + 1)}""", //закрываем консоль
                     WorkingDirectory = fileDir,
                     UseShellExecute = true
                 };
@@ -775,20 +785,18 @@ namespace GCodeRobotCSharpEdition
         {
             if (check_Layers.Checked)
             {
-                edit_Split.ReadOnly= true;
-                Laser_pass.Enabled=true;
+                edit_Split.ReadOnly = true;
+                Laser_pass.Enabled = true;
             }
             else
             {
                 edit_Split.ReadOnly = false;
                 Laser_pass.Enabled = false;
-
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void InputFile_TextChanged(object sender, EventArgs e)

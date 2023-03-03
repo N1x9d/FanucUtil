@@ -18,7 +18,7 @@ namespace GCodeRobotCSharpEdition
     public partial class Form2 : Form
     {
         public string PrPatch { get; set; }
-        public static CancellationTokenSource cts = new CancellationTokenSource(); 
+        public static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct= cts.Token;
         private StateTempl _curState= new StateTempl("Ready to print",Color.Green);
         private bool _isTranslating;
@@ -31,10 +31,6 @@ namespace GCodeRobotCSharpEdition
             set
             {
                 _curState = value;
-                
-               
-              
-
             }
         }
         public RobotTamplate robot;
@@ -98,9 +94,9 @@ namespace GCodeRobotCSharpEdition
         public Form2(string ip, RobotTamplate rtmpl)
         {
             InitializeComponent();
-            CurState= new StateTempl("Ready to print", Color.Green); 
+            CurState= new StateTempl("Ready to print", Color.Green);
             robot = rtmpl;
-            textBox2.Text = "aaa";   
+            textBox2.Text = "aaa";
             this.Text = ip;
             myTimer = new System.Windows.Forms.Timer();
             myTimer.Tick += new EventHandler(TimerEventProcessor);
@@ -110,13 +106,7 @@ namespace GCodeRobotCSharpEdition
             myTimer.Start();
 
         }
-
-
-
         System.Windows.Forms.Timer PrintTimer = new System.Windows.Forms.Timer();
-       
-        
-        
         private void Print_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog FBD = new FolderBrowserDialog();
@@ -136,23 +126,21 @@ namespace GCodeRobotCSharpEdition
 
             }
             StartPrint.Enabled = true;
-            
-           
         }
-       
-        public int timerCount { 
+
+        public int timerCount {
             get
             {
 
                 return timerCount;
             }
-            set 
+            set
             {
                 if(timerButtonlenght-value !=0 && value != 0)
                     StartPrint.Text = $"Следующий файл {timerButtonlenght - timerCount}";
                 else
                     StartPrint.Text = $"Следующий файл";
-            } 
+            }
         }
         private int timerButtonlenght;
         private bool TimerWorking = false;
@@ -161,23 +149,18 @@ namespace GCodeRobotCSharpEdition
             timerCount++;
             if (timerCount < timerButtonlenght)
             {
-                
-
-
             }
             else
             {
-                
                 timerCount = 0;
                 Collection.Enabled = false;
                 StartPrint.Text = $"Следующий файл";
                 PrintTimer.Stop();
-                
+
                  var a =Collection.Items.IndexOf(Collection.Text);
                  var task = new Task(() => robot.printNext(Collection.Items[a].ToString(), a));
                  TimerWorking = false;
                  task.Start();
-                
             }
         }
 
@@ -197,13 +180,12 @@ namespace GCodeRobotCSharpEdition
                 res++;
                 Collection.Items.Add(dirName + $"_1" + ".tp");
             }
-                
             else
                 return 0;
             for (int i = 1; i < filesCount; i++)
             {
                 if (File.Exists(patch + "\\" + dirName + $"_{i+1}" + ".tp"))
-                { 
+                {
                     res++;
                     Collection.Items.Add(dirName + $"_{i+1}" + ".tp");
                 }
@@ -265,7 +247,7 @@ namespace GCodeRobotCSharpEdition
             }
 
         }
-        
+
         private void CheckTpTranslate()
         {
             using (var client = new RequestSocket())
@@ -275,24 +257,22 @@ namespace GCodeRobotCSharpEdition
                 var msg = client.ReceiveFrameString();
                 while (true)
                 {
-                    
+
                 }
             }
         }
-       
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (!robot.isPrinting)
             { // CurFN.Text = "Текущий файл "+Collection.Items[0];
-                
+
                 var gg = Collection.Items.IndexOf(Collection.Text);
                 Await_layer.Enabled = false;
                 task = new Task(() => robot.PrintAsync(Await_layer.Checked, Collection.Items[gg].ToString(), gg));
                 task.Start();
                 myTimer.Start();
             }
-            else 
+            else
             {
                 //var a = Form1.sets.Params.Where(c => c.ParamName == "NextLayerBD").ToList();
                 //if (a.Count > 0)
@@ -315,20 +295,17 @@ namespace GCodeRobotCSharpEdition
                     //TimerWorking = true;
                     //StartPrint.Text = $"Следующий файл {timerButtonlenght}";
                     Collection.Enabled = false;
-    
+
                     //PrintTimer.Tick += new EventHandler(NextBEventProcessor);
                     //PrintTimer.Interval = 1000;
                     //PrintTimer.Start();
                 }
-                
                 var gg = Collection.Items.IndexOf(Collection.Text);
                 var task = new Task(() => robot.printNext(Collection.Items[gg].ToString(), gg));
                 task.Start();
                 myTimer.Start();
             }
         }
-
-        
 
         private void Drop_Click(object sender, EventArgs e)
         {

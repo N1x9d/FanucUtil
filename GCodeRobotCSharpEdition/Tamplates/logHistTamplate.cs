@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace GCodeRobotCSharpEdition.Tamplates
 {
     public class logHistTamplate
@@ -15,35 +16,33 @@ namespace GCodeRobotCSharpEdition.Tamplates
         }
 
         public int Type { get; set; } //1 print status, 2 hieght, 3 other
-        private string val ="";
-        public string Value { 
+        private string val = "";
+
+        public string Value
+        {
             get
             {
                 val = GetString();
                 return val;
             }
 
-            set
-            {
-                val = value;
-            }
+            set { val = value; }
         }
 
         private float z;
-        public float Z {
-            get 
-            { 
-                return z; 
-            } 
-            set 
-            { 
-                z=value;
+
+        public float Z
+        {
+            get { return z; }
+            set
+            {
+                z = value;
                 if (z < MinZ)
                     MinZ = z;
                 else if (z > MaxZ)
                     MaxZ = z;
                 AvgZ = (AvgZ + z) / 2;
-            } 
+            }
         }
 
         private float MinZ { get; set; } = 1000;
@@ -58,7 +57,8 @@ namespace GCodeRobotCSharpEdition.Tamplates
                 return val;
             else
             {
-                string outVal = $"cur z={Z}"+Environment.NewLine+ $"min z = {MinZ}" + Environment.NewLine + $"max z = {MaxZ}" + Environment.NewLine + $"avgZ = {AvgZ}";
+                string outVal = $"cur z={Z}" + Environment.NewLine + $"min z = {MinZ}" + Environment.NewLine +
+                                $"max z = {MaxZ}" + Environment.NewLine + $"avgZ = {AvgZ}";
                 return outVal;
             }
         }
